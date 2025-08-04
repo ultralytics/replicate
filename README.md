@@ -2,7 +2,7 @@
 
 # 🚀 Ultralytics Replicate
 
-Deploy YOLO11n to Replicate with ready-to-use Cog configuration and automated CI/CD workflow.
+Deploy YOLO11n to Replicate at https://replicate.com/ultralytics/yolo11n with ready-to-use Cog configuration and automated CI/CD workflow.
 
 [![Push YOLO11n to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
 [![Ultralytics Actions](https://github.com/ultralytics/replicate/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/format.yml)
@@ -39,6 +39,8 @@ ultralytics/replicate/
 ## ⚡ Quick Start
 
 ### Deploy YOLO11n Model
+
+Model will deploy to https://replicate.com/ultralytics/yolo11n:
 
 ```bash
 # Clone repository

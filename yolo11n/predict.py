@@ -2,7 +2,6 @@
 
 import json
 import tempfile
-from pathlib import Path as PathLib
 from typing import Any, Dict
 
 from cog import BasePredictor, Input, Path
@@ -12,9 +11,9 @@ from ultralytics import YOLO
 class Predictor(BasePredictor):
     """YOLO11n model predictor for Replicate deployment."""
 
-    def setup(self, weights=None) -> None:
+    def setup(self) -> None:
         """Load YOLO model into memory."""
-        self.model = YOLO("yolo11n.pt")  # Use PyTorch model
+        self.model = YOLO("yolo11n.pt")
 
     def predict(
         self,
@@ -22,13 +21,19 @@ class Predictor(BasePredictor):
         conf: float = Input(description="Confidence threshold", default=0.25, ge=0.0, le=1.0),
         iou: float = Input(description="IoU threshold for NMS", default=0.45, ge=0.0, le=1.0),
         imgsz: int = Input(description="Image size", default=640, choices=[320, 416, 512, 640, 832, 1024, 1280]),
+        return_json: bool = Input(description="Return detection results as JSON", default=True),
     ) -> Dict[str, Any]:
-        """Run inference and return annotated JPEG plus JSON detections."""
+        """Run inference and return annotated image with optional JSON results."""
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
-        result_json = json.loads(result.to_json())
 
         with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
-            output_path = PathLib(f.name)
+            output_path = Path(f.name)
             result.save(str(output_path))
 
-        return {"image": Path(output_path), "results": result_json}
+        output = {"media_path": output_path}
+
+        if return_json:
+            results = json.loads(result.to_json())
+            output["results"] = results
+
+        return output
