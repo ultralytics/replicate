@@ -1,0 +1,8 @@
+# Ultralytics Replicate - Development Dependencies
+# For running utility scripts locally (export_models.py, test_prediction.py)
+
+ultralytics>=8.3.0
+torch>=2.0.0
+torchvision
+pillow
+cog>=0.9.0

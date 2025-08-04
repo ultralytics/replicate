@@ -37,6 +37,7 @@ ultralytics/replicate/
 │
 ├── export_models.py          # Model export utility
 ├── test_prediction.py        # Local testing utility
+├── requirements.txt          # Dependencies for local development
 ├── LICENSE                   # AGPL-3.0 license
 └── README.md                 # This file
 ```
@@ -100,6 +101,12 @@ Install Cog (Replicate's deployment tool):
 ```bash
 sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_$(uname -s)_$(uname -m)
 sudo chmod +x /usr/local/bin/cog
+```
+
+For local development and testing:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## 🎯 Use Cases
