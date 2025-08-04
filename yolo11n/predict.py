@@ -12,8 +12,8 @@ class Predictor(BasePredictor):
 
     def setup(self):
         """Load YOLO model into memory."""
-        # Auto-download yolo11n.pt weights
-        self.model = YOLO("yolo11n.pt")
+        # Use pre-downloaded ONNX model for faster inference
+        self.model = YOLO("yolo11n.onnx")
 
     def predict(
         self,
