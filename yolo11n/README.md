@@ -1,6 +1,6 @@
 # YOLO11n Demo Deployment
 
-Deploy the official YOLO11n model to Replicate with PyTorch inference.
+Deploy the official YOLO11n model to Replicate with PyTorch inference at https://replicate.com/ultralytics/yolo11n.
 
 ## Setup
 
