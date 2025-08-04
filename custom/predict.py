@@ -12,9 +12,10 @@ class Predictor(BasePredictor):
 
     def setup(self):
         """Load custom YOLO model into memory."""
-        # Use ONNX for GPU-agnostic acceleration
-        # Replace 'best.onnx' with your custom model name
-        self.model = YOLO("best.onnx")
+        # Add your custom model file (best.pt, best.onnx, etc.) to this directory
+        # or modify the path below to match your model file
+        model_path = "best.pt"  # Change this to your model filename
+        self.model = YOLO(model_path)
 
     def predict(
         self,

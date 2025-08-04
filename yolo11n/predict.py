@@ -12,8 +12,8 @@ class Predictor(BasePredictor):
 
     def setup(self):
         """Load YOLO model into memory."""
-        # Use ONNX for GPU-agnostic acceleration
-        self.model = YOLO("yolo11n.onnx")
+        # Auto-download yolo11n.pt weights
+        self.model = YOLO("yolo11n.pt")
 
     def predict(
         self,
