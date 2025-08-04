@@ -58,7 +58,7 @@ jobs:
           cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
 
       - name: Push to Replicate
-        # if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         run: |
           cd yolo11n
           cog push
