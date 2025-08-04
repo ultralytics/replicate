@@ -11,8 +11,8 @@ jobs:
     name: Push to Replicate
     runs-on: ubuntu-latest
     steps:
-      - name: Cleanup disk space
-        uses: ultralytics/actions/cleanup-disk@main
+      #- name: Cleanup disk space
+      #  uses: ultralytics/actions/cleanup-disk@main
 
       - name: Checkout
         uses: actions/checkout@v4
