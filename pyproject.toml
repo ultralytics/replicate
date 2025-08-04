@@ -1,8 +1,8 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 # Overview:
-# This pyproject.toml file manages the build, packaging, and distribution of the Ultralytics Template library.
-# It defines essential project metadata, dependencies, and settings used to develop and deploy the library.
+# This pyproject.toml file manages the build, packaging, and distribution of the Ultralytics Replicate deployment tools.
+# It defines essential project metadata, dependencies, and settings used to develop and deploy YOLO models to Replicate.
 
 # Key Sections:
 # - [build-system]: Specifies the build requirements and backend (e.g., setuptools, wheel).
@@ -11,7 +11,7 @@
 # - [tool.*]: Configures settings for various tools (pytest, yapf, etc.) used in the project.
 
 # Installation:
-# The Template library can be installed using the command: 'pip install git+https://TOKEN:x-oauth-basic@github.com/ultralytics/template.git@main'
+# The Replicate deployment tools can be installed using: 'pip install git+https://TOKEN:x-oauth-basic@github.com/ultralytics/replicate.git@main'
 # For development purposes, you can install the package in editable mode with: 'pip install -e .'
 # This approach allows for real-time code modifications without the need for re-installation.
 
@@ -24,13 +24,13 @@ build-backend = "setuptools.build_meta"
 
 # Project settings -----------------------------------------------------------------------------------------------------
 [project]
-name = "template"  # Required
+name = "ultralytics-replicate"  # Required
 dynamic = ["version"]
-description = "Ultralytics Template Python Package"  # Optional
+description = "Deploy YOLO models to Replicate with ready-to-use Cog configurations and automated CI/CD workflows."  # Optional
 readme = "README.md"  # Optional
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
-keywords = ["Ultralytics", "Template"]  # Optional
+keywords = ["Ultralytics", "YOLO", "Replicate", "Computer Vision", "Object Detection", "Deployment"]  # Optional
 authors = [
     { name = "Glenn Jocher", email = "glenn.jocher@ultralytics.com" } # Optional
 ]
@@ -53,6 +53,7 @@ classifiers = [# Optional, for a list of valid classifiers, see https://pypi.org
     "Topic :: Software Development",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
     "Operating System :: POSIX :: Linux",
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
@@ -60,6 +61,10 @@ classifiers = [# Optional, for a list of valid classifiers, see https://pypi.org
 
 # Required dependencies ------------------------------------------------------------------------------------------------
 dependencies = [
+    "ultralytics>=8.0.0",
+    "torch>=2.0.0",
+    "torchvision",
+    "pillow",
     "numpy",
 ]
 
@@ -70,25 +75,19 @@ dev = [
     "pytest-cov",  # coverage with pytest
     "coverage",  # coverage with unittest
     "mkdocs",
+    "cog",  # for local testing
 ]
 
 [project.urls]  # Optional
 "Homepage" = "https://ultralytics.com"
-"Source" = "https://github.com/ultralytics/template"
+"Source" = "https://github.com/ultralytics/replicate"
 "Documentation" = "https://docs.ultralytics.com"
-"Bug Reports" = "https://github.com/ultralytics/template/issues"
-"Changelog" = "https://github.com/ultralytics/template/releases"
-
-[project.scripts]  # Optional
-example-cli-command = "template.module1:main"  # executes `template.module1.main` when "example-cli-command" is run from CLI
+"Bug Reports" = "https://github.com/ultralytics/replicate/issues"
+"Changelog" = "https://github.com/ultralytics/replicate/releases"
 
 # Tools settings -------------------------------------------------------------------------------------------------------
 [tool.setuptools]  # configuration specific to the `setuptools` build backend.
-packages = { find = { where = ["."], include = ["template", "template.*"] } }
-package-data = { "sample" = ["*.yaml"] }
-
-[tool.setuptools.dynamic]
-version = { attr = "template.__version__" }
+packages = []  # No Python packages, this is a deployment repo
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --durations=30 --color=yes"

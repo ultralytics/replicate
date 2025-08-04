@@ -1,118 +1,196 @@
 <a href="https://www.ultralytics.com/"><img src="https://raw.githubusercontent.com/ultralytics/assets/main/logo/Ultralytics_Logotype_Original.svg" width="320" alt="Ultralytics logo"></a>
 
-# 🛠 Ultralytics Python Project Template
+# 🚀 Ultralytics Replicate
 
-Welcome to the Ultralytics Python Project Template! This repository provides a standardized foundation for initiating Python projects at [Ultralytics](https://www.ultralytics.com/). It incorporates best practices in project structure, configuration, and essential tooling to streamline development. By using this template, Ultralytics developers can ensure consistency, maintain high quality standards, and accelerate the setup process for new Python-based software. Explore our [Ultralytics Solutions](https://www.ultralytics.com/solutions) to see how we apply these standards in real-world applications.
+Deploy YOLO models to Replicate with ready-to-use Cog configurations and automated CI/CD workflows.
 
-[![Template CI](https://github.com/ultralytics/template/actions/workflows/ci.yml/badge.svg)](https://github.com/ultralytics/template/actions/workflows/ci.yml)
-[![Ultralytics Actions](https://github.com/ultralytics/template/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/template/actions/workflows/format.yml)
-[![codecov](https://codecov.io/gh/ultralytics/template/graph/badge.svg?token=K9IunpFzjS)](https://codecov.io/gh/ultralytics/template)
+[![Push YOLO to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
+[![Push All YOLO Models](https://github.com/ultralytics/replicate/actions/workflows/push-all.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push-all.yml)
 
 [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics)
 [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com/)
-[![Ultralytics Reddit](https://img.shields.io/reddit/subreddit-subscribers/ultralytics?style=flat&logo=reddit&logoColor=white&label=Reddit&color=blue)](https://reddit.com/r/ultralytics)
 
 ## 🗂️ Repository Structure
 
-This template is meticulously organized for intuitive navigation and a clear understanding of project components. Familiarize yourself with the [Python project structure best practices](https://realpython.com/python-application-layouts/) to make the most of this layout.
-
-- `src/` or `your_package_name/`: Contains the core source code of your Python package, organized into modules. Using a `src` layout is a common practice detailed in [Python packaging guides](https://packaging.python.org/en/latest/tutorials/packaging-projects/#configuring-metadata).
-- `tests/`: Dedicated directory for unit tests and integration tests, crucial for implementing [continuous testing](https://docs.ultralytics.com/help/CI/) practices. Consider using frameworks like [pytest](https://docs.pytest.org/en/stable/) for writing tests.
-- `docs/`: (Optional) Houses project documentation. Tools like [MkDocs](https://www.mkdocs.org/) can be used to generate comprehensive documentation from this directory.
-- `pyproject.toml`: The standard configuration file for Python projects, detailing dependencies, build system requirements, formatting rules, and packaging information as specified by [PEP 518](https://peps.python.org/pep-0518/) and subsequent PEPs.
-- `.gitignore`: Configured to exclude unnecessary files (like `*.pyc` or virtual environment directories) from [Git](https://git-scm.com/) tracking.
-- `LICENSE`: Specifies the open-source license (defaulting to AGPL-3.0) under which the project is released.
-- `.github/workflows/`: Contains [GitHub Actions](https://docs.github.com/en/actions) workflows for automating Continuous Integration and Continuous Deployment (CI/CD) processes. Learn more about [CI/CD concepts](https://www.redhat.com/en/topics/devops/what-is-ci-cd).
-- `.pre-commit-config.yaml`: (Optional) Configuration for [pre-commit hooks](https://pre-commit.com/) to automatically check and enforce code quality standards before commits.
-- `Dockerfile`: (Optional) Defines instructions for building a [Docker](https://www.docker.com/) container image, enabling [containerization](https://www.ultralytics.com/glossary/containerization) of the project environment for consistent deployment.
-- `environment.yml`: (Optional, for Conda users) Manages dependencies for [Conda environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+This repository provides optimized Replicate deployments for Ultralytics YOLO models with automated CI/CD workflows.
 
 ```plaintext
-your-project/
+ultralytics/replicate/
 │
-├── your_package_name/          # Or src/ for src-layout
-│   ├── __init__.py
-│   ├── module1.py
-│   ├── module2.py
-│   └── ...
+├── yolo11n/                   # Official YOLO11n demo
+│   ├── cog.yaml              # Cog configuration
+│   ├── predict.py            # Prediction interface
+│   ├── yolo11n.onnx          # Model weights (add yourself)
+│   └── README.md             # Model-specific docs
 │
-├── tests/                      # Test suite
-│   ├── __init__.py
-│   ├── test_module1.py
-│   └── ...
+├── custom/                    # Custom model template
+│   ├── cog.yaml              # Cog configuration  
+│   ├── predict.py            # Prediction interface
+│   ├── best.onnx             # Your custom weights (add yourself)
+│   └── README.md             # Custom model guide
 │
-├── docs/                       # Documentation files (optional)
-│   └── ...
+├── .github/workflows/         # Automated deployment
+│   ├── push.yml              # Manual model push
+│   ├── push-all.yml          # Push all models
+│   ├── ci.yml                # Code quality checks
+│   └── format.yml            # Code formatting
 │
-├── .github/                    # GitHub Actions workflows
-│   └── workflows/
-│       ├── ci.yml
-|       └── format.yml
-│
-├── .gitignore                  # Git ignore rules
-├── .pre-commit-config.yaml     # Pre-commit hook config (optional)
-├── Dockerfile                  # Docker configuration (optional)
-├── environment.yml             # Conda environment config (optional)
-├── LICENSE                     # Project license file
-├── pyproject.toml              # Project configuration and dependencies
-└── README.md                   # This file
+├── export_models.py           # Model export utility
+├── test_prediction.py         # Local testing utility
+├── LICENSE                    # AGPL-3.0 license
+└── README.md                  # This file
 ```
 
-### 📦 Source Code Directory (`src/` or `your_package_name/`)
+## ⚡ Quick Start
 
-The `src/` or `your_package_name/` directory is the heart of your project, containing the Python code that constitutes your package. Adopting a structured layout promotes clean imports and simplifies testing and packaging.
+### 1. Deploy Official YOLO11n Model
 
-### 🧪 Testing Directory (`tests/`)
+```bash
+# Clone repository
+git clone https://github.com/ultralytics/replicate.git
+cd replicate
 
-The `tests/` directory is crucial for ensuring code reliability and robustness. It should contain comprehensive unit and integration tests covering various aspects of your package. Effective testing is a cornerstone of quality software development.
+# Export official YOLO11n model
+yolo export model=yolo11n.pt format=onnx
 
-### 📚 Documentation Directory (`docs/`)
+# Add model weights
+cp yolo11n.onnx yolo11n/
 
-For projects requiring detailed documentation beyond the README, the `docs/` directory is the designated space. Utilizing tools like [Sphinx](https://www.sphinx-doc.org/en/master/) allows for the generation of professional, high-quality documentation from reStructuredText or Markdown files. Check out the [Ultralytics Docs](https://docs.ultralytics.com/) for an example.
+# Deploy to Replicate
+cd yolo11n
+cog login
+cog push r8.im/ultralytics/yolo11n
+```
 
-## ✨ Starting a New Project
+### 2. Deploy Your Custom Model
 
-Kickstart your new Python project using this template with these steps:
+```bash
+# Export your custom model
+yolo export model=best.pt format=onnx
 
-1.  **Create Your Repository**: Use this template on GitHub by clicking the "Use this template" button to generate a new repository for your project. Learn more about [creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
-2.  **Customize**: Tailor the template files (`pyproject.toml`, `README.md`, `.github/workflows/*.yml`, etc.) to match your specific project's name, goals, and requirements.
-3.  **Develop**: Begin adding your source code into the `your_package_name/` (or `src/`) directory and write corresponding tests in the `tests/` directory.
-4.  **Document**: Update this `README.md` thoroughly and, if needed, populate the `docs/` directory with more extensive documentation.
-5.  **Integrate**: Leverage the pre-configured GitHub Actions for automated testing, linting, and other [CI/CD](https://www.ultralytics.com/glossary/continuous-integration-ci) processes to maintain code quality.
+# Add to custom directory
+cp best.onnx custom/
 
-## 🔧 Utilizing the Template
+# Update image name in custom/cog.yaml
+# image: "r8.im/your-username/your-model-name"
 
-For Ultralytics team members and external contributors:
+# Deploy your custom model
+cd custom
+cog push r8.im/your-username/your-model-name
+```
 
-- Clone the newly created repository based on this template to start working on the project locally.
-- Ensure the `README.md` is updated to accurately reflect the project's purpose, usage, and specifics.
-- Remove or modify optional components (like `Dockerfile`, `environment.yml`) based on the project's deployment and dependency management strategy.
+### 3. Automated Deployment with GitHub Actions
 
-With this template, Ultralytics aims to foster a culture of excellence and uniformity in Python software development, ensuring every project starts on a solid foundation aligned with industry standards and organizational best practices. For insights into managing ML projects, explore our [MLOps guide](https://www.ultralytics.com/glossary/machine-learning-operations-mlops).
+1. **Setup secrets:**
+   - Go to repository Settings → Secrets → Actions
+   - Add `REPLICATE_CLI_AUTH_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
+
+2. **Setup variables:**
+   - Go to Settings → Variables → Actions  
+   - Add `DEFAULT_MODEL_NAME` = `ultralytics/yolo11n`
+
+3. **Deploy:**
+   - **Manual**: Actions tab → "Push YOLO to Replicate" → Run workflow
+   - **Automatic**: Push changes to `main` branch auto-deploys all models
+
+## 🛠️ Installation
+
+Install Cog (Replicate's deployment tool):
+
+```bash
+sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_`uname -s`_`uname -m`
+sudo chmod +x /usr/local/bin/cog
+```
+
+## 🎯 Use Cases
+
+### Official Model Demo (`yolo11n/`)
+- **Purpose**: Demonstrate official YOLO11n deployment
+- **Model**: Pre-trained YOLO11n (2.6M parameters)
+- **Classes**: 80 COCO classes
+- **Use Case**: Quick proof-of-concept, API demos
+
+### Custom Model Template (`custom/`)
+- **Purpose**: Deploy your own trained models
+- **Model**: Your `best.pt` checkpoint
+- **Classes**: Your custom classes
+- **Use Case**: Production deployments, specialized detection
+
+## 🔧 Model Export Utility
+
+Use the included export script for batch processing:
+
+```bash
+# Export official model
+python export_models.py --model yolo11n.pt --output yolo11n/
+
+# Export custom model  
+python export_models.py --model best.pt --output custom/
+```
+
+## 🧪 Local Testing
+
+Test your models locally before deploying:
+
+```bash
+# Test official YOLO11n
+python test_prediction.py --model yolo11n --image test.jpg
+
+# Test custom model
+python test_prediction.py --model custom --image test.jpg
+```
+
+## 🚀 Features
+
+- **🏎️ Optimized**: ONNX models for cross-GPU compatibility
+- **🤖 Automated**: GitHub Actions for CI/CD
+- **📦 Ready-to-use**: Pre-configured for YOLO11n demo
+- **🔧 Flexible**: Template for custom model deployment
+- **📊 Scalable**: Supports multiple model deployments
+- **🎯 Focused**: Official demo + custom template approach
+
+## 📚 Examples
+
+### Deploy Fine-tuned Model
+```bash
+# After training on custom dataset
+yolo train data=my_dataset.yaml model=yolo11n.pt epochs=100
+
+# Export best checkpoint
+yolo export model=runs/detect/train/weights/best.pt format=onnx
+
+# Deploy to Replicate
+cp runs/detect/train/weights/best.onnx custom/
+cd custom
+cog push r8.im/myusername/my-detector
+```
+
+### Update Custom Model
+```python
+# In custom/predict.py, update model name if needed
+self.model = YOLO("my_model.onnx")  # Instead of "best.onnx"
+```
 
 ## 💡 Contribute
 
-Ultralytics thrives on community collaboration, and we deeply value your contributions! Whether it's reporting bugs, suggesting features, or submitting code changes, your involvement is crucial.
+We welcome contributions! Whether it's adding new deployment examples, improving configurations, or enhancing documentation:
 
-- **Reporting Issues**: Encounter a bug? Please report it on [GitHub Issues](https://github.com/ultralytics/template/issues).
-- **Feature Requests**: Have an idea for improvement? Share it via [GitHub Issues](https://github.com/ultralytics/template/issues).
-- **Pull Requests**: Want to contribute code? Please read our [Contributing Guide](https://docs.ultralytics.com/help/contributing/) first, then submit a Pull Request.
-- **Feedback**: Share your thoughts and experiences by participating in our official [Survey](https://www.ultralytics.com/survey?utm_source=github&utm_medium=social&utm_campaign=Survey).
-
-A heartfelt thank you 🙏 goes out to all our contributors! Your efforts help make Ultralytics tools better for everyone.
-
-[![Ultralytics open-source contributors](https://raw.githubusercontent.com/ultralytics/assets/main/im/image-contributors.png)](https://github.com/ultralytics/ultralytics/graphs/contributors)
+- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/ultralytics/replicate/issues)
+- **Pull Requests**: Follow our [Contributing Guide](https://docs.ultralytics.com/help/contributing/)
+- **Discussions**: Join our [Discord](https://discord.com/invite/ultralytics) community
 
 ## 📄 License
 
-Ultralytics offers two licensing options to accommodate diverse needs:
+Ultralytics offers two licensing options:
 
-- **AGPL-3.0 License**: Ideal for students, researchers, and enthusiasts passionate about open collaboration and knowledge sharing. This [OSI-approved](https://opensource.org/license/agpl-v3) open-source license promotes transparency and community involvement. See the [LICENSE](LICENSE) file for details.
-- **Enterprise License**: Designed for commercial applications, this license permits the seamless integration of Ultralytics software and AI models into commercial products and services, bypassing the copyleft requirements of AGPL-3.0. For commercial use cases, please inquire about an [Ultralytics Enterprise License](https://www.ultralytics.com/license).
+- **AGPL-3.0 License**: Open-source license for research and non-commercial use. See [LICENSE](LICENSE) file.
+- **Enterprise License**: For commercial applications. Contact [Ultralytics Licensing](https://www.ultralytics.com/license).
 
 ## 📮 Contact
 
-For bug reports or feature suggestions related to this template or other Ultralytics projects, please use [GitHub Issues](https://github.com/ultralytics/template/issues). For general questions, discussions, and community support, join our [Discord](https://discord.com/invite/ultralytics) server!
+- **Issues**: [GitHub Issues](https://github.com/ultralytics/replicate/issues)
+- **Community**: [Discord](https://discord.com/invite/ultralytics)
+- **Enterprise**: [Ultralytics Enterprise](https://www.ultralytics.com/license)
 
 <br>
 <div align="center">
