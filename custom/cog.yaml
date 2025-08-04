@@ -23,3 +23,8 @@ examples:
       conf: 0.25
       iou: 0.45
       imgsz: 640
+  - input:
+      image: https://github.com/ultralytics/assets/releases/download/v0.0.0/zidane.jpg
+      conf: 0.25
+      iou: 0.45
+      imgsz: 640

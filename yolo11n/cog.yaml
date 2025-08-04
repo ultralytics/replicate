@@ -25,3 +25,9 @@ examples:
       iou: 0.45
       imgsz: 640
     output: https://github.com/ultralytics/assets/releases/download/v0.0.0/bus-detected.jpg
+  - input:
+      image: https://github.com/ultralytics/assets/releases/download/v0.0.0/zidane.jpg
+      conf: 0.25
+      iou: 0.45
+      imgsz: 640
+    output: https://github.com/ultralytics/assets/releases/download/v0.0.0/zidane-predicted.jpg
