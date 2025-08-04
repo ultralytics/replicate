@@ -11,7 +11,7 @@ jobs:
         include:
           - dir: yolo11n
             model: ultralytics/yolo11n
-          - dir: custom  
+          - dir: custom
             model: your-username/your-custom-model
     steps:
       - name: Free disk space
@@ -22,12 +22,12 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Cog
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
-          
+
       - name: Push to Replicate
         run: |
           cd ${{ matrix.dir }}

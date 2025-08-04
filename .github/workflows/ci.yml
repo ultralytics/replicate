@@ -14,9 +14,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.11", "3.12"]
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +38,7 @@ jobs:
           python -m py_compile export_models.py
           python export_models.py --help
 
-      - name: Test test_prediction.py syntax  
+      - name: Test test_prediction.py syntax
         run: |
           python -m py_compile test_prediction.py
           python test_prediction.py --help
@@ -54,12 +54,12 @@ jobs:
       - name: Test prediction scripts
         run: |
           # Test Python imports work
-          python -c "from yolo11n.predict import Predictor; print('✅ yolo11n predictor import OK')"
-          python -c "from custom.predict import Predictor; print('✅ custom predictor import OK')" 
+          python -c "from yolo11n.predict import Predictor; print('yolo11n predictor import OK')"
+          python -c "from custom.predict import Predictor; print('custom predictor import OK')" 
         continue-on-error: true
 
       - name: Validate Cog configurations
         run: |
           # Check YAML syntax
-          python -c "import yaml; yaml.safe_load(open('yolo11n/cog.yaml')); print('✅ yolo11n cog.yaml valid')"
-          python -c "import yaml; yaml.safe_load(open('custom/cog.yaml')); print('✅ custom cog.yaml valid')"
+          python -c "import yaml; yaml.safe_load(open('yolo11n/cog.yaml')); print('yolo11n cog.yaml valid')"
+          python -c "import yaml; yaml.safe_load(open('custom/cog.yaml')); print('custom cog.yaml valid')"
