@@ -84,7 +84,7 @@ cog push r8.im/your-username/your-model-name
 
 1. **Setup secrets:**
    - Go to repository Settings → Secrets → Actions
-   - Add `REPLICATE_CLI_AUTH_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
+   - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
 
 2. **Setup variables:**
    - Go to Settings → Variables → Actions
