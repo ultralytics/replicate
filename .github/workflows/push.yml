@@ -40,7 +40,10 @@ jobs:
           model = YOLO('yolo11n.pt')
           model.export(format='onnx', optimize=True, dynamic=True)
           EOF
+          ls -la yolo11n*
           mv yolo11n.pt yolo11n.onnx yolo11n/
+          echo "Files in yolo11n directory:"
+          ls -la yolo11n/
 
       - name: Push to Replicate
         run: |
