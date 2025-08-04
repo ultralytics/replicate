@@ -11,6 +11,8 @@ Deploy YOLO11n to Replicate with ready-to-use Cog configuration and automated CI
 [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com/)
 [![Ultralytics Reddit](https://img.shields.io/reddit/subreddit-subscribers/ultralytics?style=flat&logo=reddit&logoColor=white&label=Reddit&color=blue)](https://reddit.com/r/ultralytics)
 
+<img width="1920" height="939" alt="Replicate AI" src="https://github.com/user-attachments/assets/effaa643-4710-4187-849a-aa4d933fb0ee" />
+
 ## 🗂️ Repository Structure
 
 This repository provides optimized Replicate deployment for the YOLO11n model with automated CI/CD workflow.
