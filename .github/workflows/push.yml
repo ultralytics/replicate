@@ -1,6 +1,8 @@
 name: Push YOLO to Replicate
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       model_name:
