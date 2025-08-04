@@ -1,9 +1,12 @@
-name: Push YOLO11n to Replicate
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+name: Push YOLO to Replicate
 
 on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
