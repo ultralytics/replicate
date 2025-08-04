@@ -1,7 +1,6 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import json
-import tempfile
 from typing import Any, Dict
 
 from cog import BasePredictor, Input, Path
