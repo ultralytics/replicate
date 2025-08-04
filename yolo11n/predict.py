@@ -31,9 +31,9 @@ class Predictor(BasePredictor):
             result.save(str(output_path))
 
         output = {"media_path": output_path}
-        
+
         if return_json:
             results = json.loads(result.to_json())
             output["results"] = results
-            
+
         return output
