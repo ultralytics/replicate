@@ -14,7 +14,7 @@ class Predictor(BasePredictor):
 
     def setup(self):
         """Load YOLO model into memory."""
-        self.model = YOLO("yolo11n.onnx")  # Use pre-downloaded ONNX model for faster inference
+        self.model = YOLO("yolo11n.pt")  # Use PyTorch model
 
     def predict(
         self,

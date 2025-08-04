@@ -1,22 +1,10 @@
 # YOLO11n Demo Deployment
 
-Deploy the official YOLO11n model to Replicate with optimized ONNX inference.
+Deploy the official YOLO11n model to Replicate with PyTorch inference.
 
 ## Setup
 
-1. **Export the official YOLO11n model to ONNX:**
-
-   ```bash
-   yolo export model=yolo11n.pt format=onnx
-   ```
-
-2. **Add model weights to this directory:**
-
-   ```bash
-   cp yolo11n.onnx ./
-   ```
-
-3. **Deploy to Replicate:**
+1. **Deploy to Replicate:**
    ```bash
    cog push r8.im/ultralytics/yolo11n
    ```
@@ -25,16 +13,16 @@ Deploy the official YOLO11n model to Replicate with optimized ONNX inference.
 
 - **Model**: YOLO11n (Nano)
 - **Parameters**: 2.6M
-- **Format**: ONNX for cross-GPU compatibility
+- **Format**: PyTorch (.pt)
 - **Use Case**: Demonstration of official Ultralytics model deployment
 
 ## Model Files
 
-**Note:** Model weight files (`.onnx`) are not included in this repository. Export the official model using the Ultralytics library as shown above.
+**Note:** The model weights (`yolo11n.pt`) will be automatically downloaded by ultralytics when the container starts.
 
 ## Configuration
 
-- **GPU**: Enabled by default for optimal inference speed
+- **GPU**: Disabled by default (CPU inference)
 - **Python**: 3.11 with PyTorch 2.0+
 - **Framework**: Ultralytics 8.3+
 - **Input**: Single image with configurable confidence/IoU thresholds

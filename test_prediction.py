@@ -25,16 +25,16 @@ def test_prediction(model_dir: str, image_path: str) -> None:
             return
 
         # Check for model files
-        onnx_files = list(model_path.glob("*.onnx"))
-        if not onnx_files:
-            print(f"❌ No ONNX model files found in {model_dir}")
+        pt_files = list(model_path.glob("*.pt"))
+        if not pt_files:
+            print(f"❌ No PyTorch model files found in {model_dir}")
             if model_dir == "yolo11n":
-                print("💡 Run: python export_models.py --model yolo11n.pt --output yolo11n")
+                print("💡 Make sure yolo11n.pt is in the yolo11n/ directory")
             else:
-                print("💡 Run: python export_models.py --model best.pt --output custom")
+                print("💡 Make sure your custom .pt model is in the custom/ directory")
             return
 
-        print(f"✅ Found ONNX models: {[f.name for f in onnx_files]}")
+        print(f"✅ Found PyTorch models: {[f.name for f in pt_files]}")
 
         # Import and test the predictor
         sys.path.insert(0, str(model_path))

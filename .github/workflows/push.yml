@@ -26,7 +26,7 @@ jobs:
         uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies
-        run: uv pip install --system ultralytics onnx onnxruntime onnxslim --extra-index-url https://download.pytorch.org/whl/cpu
+        run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
 
       - name: Setup Cog
         uses: replicate/setup-cog@v2
@@ -38,10 +38,9 @@ jobs:
           python << 'EOF'
           from ultralytics import YOLO
           model = YOLO('yolo11n.pt')
-          model.export(format='onnx', optimize=True, dynamic=True)
           EOF
           ls -la yolo11n*
-          mv yolo11n.pt yolo11n.onnx yolo11n/
+          mv yolo11n.pt yolo11n/
           echo "Files in yolo11n directory:"
           ls -la yolo11n/
 
