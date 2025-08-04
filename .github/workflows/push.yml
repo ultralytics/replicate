@@ -11,7 +11,7 @@ on:
       model_dir:
         description: 'Model directory (e.g. "yolo11n" or "custom")'
         required: true
-        default: 'yolo11n'
+        default: "yolo11n"
 
 jobs:
   push_to_replicate:

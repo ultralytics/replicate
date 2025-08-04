@@ -83,10 +83,12 @@ cog push r8.im/your-username/your-model-name
 ### 3. Automated Deployment with GitHub Actions
 
 1. **Setup secrets:**
+
    - Go to repository Settings → Secrets → Actions
    - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
 
 2. **Setup variables:**
+
    - Go to Settings → Variables → Actions
    - Add `DEFAULT_MODEL_NAME` = `ultralytics/yolo11n`
 
