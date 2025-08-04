@@ -5,10 +5,6 @@ on:
     branches: [main]
   workflow_dispatch:
     inputs:
-      model_name:
-        description: 'Model name (e.g. "ultralytics/yolo11n")'
-        required: true
-        default: "ultralytics/yolo11n"
       model_dir:
         description: 'Model directory (e.g. "yolo11n" or "custom")'
         required: true
@@ -33,4 +29,4 @@ jobs:
       - name: Push to Replicate
         run: |
           cd ${{ inputs.model_dir || 'yolo11n' }}
-          cog push r8.im/${{ inputs.model_name || 'ultralytics/yolo11n' }}
+          cog push
