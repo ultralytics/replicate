@@ -17,28 +17,28 @@ This repository provides optimized Replicate deployments for Ultralytics YOLO mo
 ```plaintext
 ultralytics/replicate/
 │
-├── yolo11n/                   # Official YOLO11n demo
+├── yolo11n/                  # Official YOLO11n demo
 │   ├── cog.yaml              # Cog configuration
 │   ├── predict.py            # Prediction interface
 │   ├── yolo11n.onnx          # Model weights (add yourself)
 │   └── README.md             # Model-specific docs
 │
-├── custom/                    # Custom model template
+├── custom/                   # Custom model template
 │   ├── cog.yaml              # Cog configuration  
 │   ├── predict.py            # Prediction interface
 │   ├── best.onnx             # Your custom weights (add yourself)
 │   └── README.md             # Custom model guide
 │
-├── .github/workflows/         # Automated deployment
+├── .github/workflows/        # Automated deployment
 │   ├── push.yml              # Manual model push
 │   ├── push-all.yml          # Push all models
 │   ├── ci.yml                # Code quality checks
 │   └── format.yml            # Code formatting
 │
-├── export_models.py           # Model export utility
-├── test_prediction.py         # Local testing utility
-├── LICENSE                    # AGPL-3.0 license
-└── README.md                  # This file
+├── export_models.py          # Model export utility
+├── test_prediction.py        # Local testing utility
+├── LICENSE                   # AGPL-3.0 license
+└── README.md                 # This file
 ```
 
 ## ⚡ Quick Start
