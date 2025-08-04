@@ -24,7 +24,7 @@ ultralytics/replicate/
 │   └── README.md             # Model-specific docs
 │
 ├── custom/                   # Custom model template
-│   ├── cog.yaml              # Cog configuration  
+│   ├── cog.yaml              # Cog configuration
 │   ├── predict.py            # Prediction interface
 │   ├── best.onnx             # Your custom weights (add yourself)
 │   └── README.md             # Custom model guide
@@ -86,7 +86,7 @@ cog push r8.im/your-username/your-model-name
    - Add `REPLICATE_CLI_AUTH_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
 
 2. **Setup variables:**
-   - Go to Settings → Variables → Actions  
+   - Go to Settings → Variables → Actions
    - Add `DEFAULT_MODEL_NAME` = `ultralytics/yolo11n`
 
 3. **Deploy:**
@@ -98,19 +98,21 @@ cog push r8.im/your-username/your-model-name
 Install Cog (Replicate's deployment tool):
 
 ```bash
-sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_`uname -s`_`uname -m`
+sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_$(uname -s)_$(uname -m)
 sudo chmod +x /usr/local/bin/cog
 ```
 
 ## 🎯 Use Cases
 
 ### Official Model Demo (`yolo11n/`)
+
 - **Purpose**: Demonstrate official YOLO11n deployment
 - **Model**: Pre-trained YOLO11n (2.6M parameters)
 - **Classes**: 80 COCO classes
 - **Use Case**: Quick proof-of-concept, API demos
 
 ### Custom Model Template (`custom/`)
+
 - **Purpose**: Deploy your own trained models
 - **Model**: Your `best.pt` checkpoint
 - **Classes**: Your custom classes
@@ -124,7 +126,7 @@ Use the included export script for batch processing:
 # Export official model
 python export_models.py --model yolo11n.pt --output yolo11n/
 
-# Export custom model  
+# Export custom model
 python export_models.py --model best.pt --output custom/
 ```
 
@@ -152,6 +154,7 @@ python test_prediction.py --model custom --image test.jpg
 ## 📚 Examples
 
 ### Deploy Fine-tuned Model
+
 ```bash
 # After training on custom dataset
 yolo train data=my_dataset.yaml model=yolo11n.pt epochs=100
@@ -166,6 +169,7 @@ cog push r8.im/myusername/my-detector
 ```
 
 ### Update Custom Model
+
 ```python
 # In custom/predict.py, update model name if needed
 self.model = YOLO("my_model.onnx")  # Instead of "best.onnx"

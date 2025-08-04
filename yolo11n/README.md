@@ -5,11 +5,13 @@ Deploy the official YOLO11n model to Replicate with optimized ONNX inference.
 ## Setup
 
 1. **Export the official YOLO11n model to ONNX:**
+
    ```bash
    yolo export model=yolo11n.pt format=onnx
    ```
 
 2. **Add model weights to this directory:**
+
    ```bash
    cp yolo11n.onnx ./
    ```
@@ -22,7 +24,7 @@ Deploy the official YOLO11n model to Replicate with optimized ONNX inference.
 ## Model Details
 
 - **Model**: YOLO11n (Nano)
-- **Parameters**: 2.6M 
+- **Parameters**: 2.6M
 - **Format**: ONNX for cross-GPU compatibility
 - **Use Case**: Demonstration of official Ultralytics model deployment
 

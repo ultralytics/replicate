@@ -6,11 +6,13 @@ Deploy your own custom-trained YOLO models to Replicate. This example shows how 
 
 1. **Train your custom model** (or use existing `best.pt`)
 2. **Export your custom model to ONNX:**
+
    ```bash
    yolo export model=best.pt format=onnx
    ```
 
 3. **Add model weights to this directory:**
+
    ```bash
    cp best.onnx ./
    ```
@@ -18,6 +20,7 @@ Deploy your own custom-trained YOLO models to Replicate. This example shows how 
 4. **Update the model name in `predict.py`** if different from `best.onnx`
 
 5. **Update `cog.yaml`** with your desired image name:
+
    ```yaml
    image: "r8.im/your-username/your-custom-model"
    ```
@@ -36,6 +39,7 @@ Deploy your own custom-trained YOLO models to Replicate. This example shows how 
 ## Model Files
 
 Place your custom model files in this directory:
+
 - `best.onnx` - Your custom trained model (exported from `best.pt`)
 - `predict.py` - Update model name if different
 - `cog.yaml` - Update image name for your deployment
