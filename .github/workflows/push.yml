@@ -21,7 +21,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Install dependencies
-        run: uv pip install --system -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
+        run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
 
       - name: Setup Cog
         uses: replicate/setup-cog@v2
