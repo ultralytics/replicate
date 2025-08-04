@@ -29,7 +29,6 @@ jobs:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
 
       - name: Download YOLO11n weights
-        run: |
           python -c "from ultralytics import YOLO; YOLO('yolo11n.pt').export(format='onnx', optimize=True, dynamic=True)"
           mv yolo11n.pt yolo11n.onnx yolo11n/
 
