@@ -1,6 +1,6 @@
 build:
-  gpu: true
-  python_version: '3.11'
+  gpu: false
+  python_version: '3.12'
   python_packages:
   - ultralytics>=8.3.0
   - torch>=2.0.0
@@ -8,7 +8,7 @@ build:
   - pillow
 predict: predict.py:Predictor
 image: r8.im/ultralytics/yolo11n
-description: YOLO11N object detection model with 2.6M parameters. Achieves 39.5 mAP50-95
+description: YOLO11n object detection model with 2.6M parameters. Achieves 39.5 mAP50-95
   on COCO dataset. Optimized for real-time inference with 1.55ms speed.
 github_url: https://github.com/ultralytics/replicate
 paper_url: https://docs.ultralytics.com/models/yolo11/
