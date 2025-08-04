@@ -2,9 +2,9 @@
 
 # 🚀 Ultralytics Replicate
 
-Deploy YOLO models to Replicate with ready-to-use Cog configurations and automated CI/CD workflows.
+Deploy YOLO11n to Replicate with ready-to-use Cog configuration and automated CI/CD workflow.
 
-[![Push YOLO to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
+[![Push YOLO11n to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
 [![Ultralytics Actions](https://github.com/ultralytics/replicate/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/format.yml)
 
 [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics)
@@ -13,49 +13,36 @@ Deploy YOLO models to Replicate with ready-to-use Cog configurations and automat
 
 ## 🗂️ Repository Structure
 
-This repository provides optimized Replicate deployments for Ultralytics YOLO models with automated CI/CD workflows.
+This repository provides optimized Replicate deployment for the YOLO11n model with automated CI/CD workflow.
 
 ```plaintext
 ultralytics/replicate/
 │
-├── yolo11n/                  # Official YOLO11n demo
+├── yolo11n/                  # YOLO11n model deployment
 │   ├── cog.yaml              # Cog configuration
 │   ├── predict.py            # Prediction interface
-│   ├── yolo11n.onnx          # Model weights (add yourself)
-│   └── README.md             # Model-specific docs
-│
-├── custom/                   # Custom model template
-│   ├── cog.yaml              # Cog configuration
-│   ├── predict.py            # Prediction interface
-│   ├── best.onnx             # Your custom weights (add yourself)
-│   └── README.md             # Custom model guide
+│   └── README.md             # Model documentation
 │
 ├── .github/workflows/        # Automated deployment
-│   ├── push.yml              # Manual model push
+│   ├── push.yml              # Model deployment workflow
 │   ├── ci.yml                # Code quality checks
 │   └── format.yml            # Code formatting
 │
 ├── export_models.py          # Model export utility
 ├── test_prediction.py        # Local testing utility
-├── requirements.txt          # Dependencies for local development
+├── requirements.txt          # Dependencies
 ├── LICENSE                   # AGPL-3.0 license
 └── README.md                 # This file
 ```
 
 ## ⚡ Quick Start
 
-### 1. Deploy Official YOLO11n Model
+### Deploy YOLO11n Model
 
 ```bash
 # Clone repository
 git clone https://github.com/ultralytics/replicate.git
 cd replicate
-
-# Export official YOLO11n model
-yolo export model=yolo11n.pt format=onnx
-
-# Add model weights
-cp yolo11n.onnx yolo11n/
 
 # Deploy to Replicate
 cd yolo11n
@@ -63,36 +50,15 @@ cog login
 cog push r8.im/ultralytics/yolo11n
 ```
 
-### 2. Deploy Your Custom Model
-
-```bash
-# Export your custom model
-yolo export model=best.pt format=onnx
-
-# Add to custom directory
-cp best.onnx custom/
-
-# Update image name in custom/cog.yaml
-# image: "r8.im/your-username/your-model-name"
-
-# Deploy your custom model
-cd custom
-cog push r8.im/your-username/your-model-name
-```
-
-### 3. Automated Deployment with GitHub Actions
+### Automated Deployment with GitHub Actions
 
 1. **Setup secrets:**
    - Go to repository Settings → Secrets → Actions
    - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
 
-2. **Setup variables:**
-   - Go to Settings → Variables → Actions
-   - Add `DEFAULT_MODEL_NAME` = `ultralytics/yolo11n`
-
-3. **Deploy:**
-   - **Manual**: Actions tab → "Push YOLO to Replicate" → Run workflow
-   - **Automatic**: Push changes to `main` branch auto-deploys all models
+2. **Deploy:**
+   - **Manual**: Actions tab → "Push YOLO11n to Replicate" → Run workflow
+   - **Automatic**: Push changes to `main` branch auto-deploys
 
 ## 🛠️ Installation
 
@@ -109,78 +75,39 @@ For local development and testing:
 pip install -r requirements.txt
 ```
 
-## 🎯 Use Cases
+## 🎯 YOLO11n Model
 
-### Official Model Demo (`yolo11n/`)
-
-- **Purpose**: Demonstrate official YOLO11n deployment
-- **Model**: Pre-trained YOLO11n (2.6M parameters)
+- **Purpose**: Official YOLO11n object detection
+- **Parameters**: 2.6M parameters
 - **Classes**: 80 COCO classes
-- **Use Case**: Quick proof-of-concept, API demos
-
-### Custom Model Template (`custom/`)
-
-- **Purpose**: Deploy your own trained models
-- **Model**: Your `best.pt` checkpoint
-- **Classes**: Your custom classes
-- **Use Case**: Production deployments, specialized detection
+- **Performance**: 39.5 mAP50-95 on COCO dataset
+- **Speed**: Optimized for real-time inference
 
 ## 🔧 Model Export Utility
 
-Use the included export script for batch processing:
+Use the included export script:
 
 ```bash
-# Export official model
+# Export YOLO11n model
 python export_models.py --model yolo11n.pt --output yolo11n/
-
-# Export custom model
-python export_models.py --model best.pt --output custom/
 ```
 
 ## 🧪 Local Testing
 
-Test your models locally before deploying:
+Test the model locally before deploying:
 
 ```bash
-# Test official YOLO11n
+# Test YOLO11n
 python test_prediction.py --model yolo11n --image test.jpg
-
-# Test custom model
-python test_prediction.py --model custom --image test.jpg
 ```
 
 ## 🚀 Features
 
-- **🏎️ Optimized**: ONNX models for cross-GPU compatibility
+- **🏎️ Optimized**: ONNX model for GPU-agnostic inference
 - **🤖 Automated**: GitHub Actions for CI/CD
-- **📦 Ready-to-use**: Pre-configured for YOLO11n demo
-- **🔧 Flexible**: Template for custom model deployment
-- **📊 Scalable**: Supports multiple model deployments
-- **🎯 Focused**: Official demo + custom template approach
-
-## 📚 Examples
-
-### Deploy Fine-tuned Model
-
-```bash
-# After training on custom dataset
-yolo train data=my_dataset.yaml model=yolo11n.pt epochs=100
-
-# Export best checkpoint
-yolo export model=runs/detect/train/weights/best.pt format=onnx
-
-# Deploy to Replicate
-cp runs/detect/train/weights/best.onnx custom/
-cd custom
-cog push r8.im/myusername/my-detector
-```
-
-### Update Custom Model
-
-```python
-# In custom/predict.py, update model name if needed
-self.model = YOLO("my_model.onnx")  # Instead of "best.onnx"
-```
+- **📦 Ready-to-use**: Pre-configured YOLO11n deployment
+- **📊 Scalable**: Auto-scaling Replicate infrastructure
+- **🎯 Simple**: Single model focus
 
 ## 💡 Contribute
 
