@@ -40,6 +40,8 @@ ultralytics/replicate/
 
 ### Deploy YOLO11n Model
 
+Model will deploy to https://replicate.com/ultralytics/yolo11n:
+
 ```bash
 # Clone repository
 git clone https://github.com/ultralytics/replicate.git
