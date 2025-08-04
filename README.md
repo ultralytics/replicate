@@ -88,6 +88,7 @@ The model will be automatically downloaded by ultralytics when needed:
 
 ```python
 from ultralytics import YOLO
+
 model = YOLO("yolo11n.pt")  # Downloads automatically if not present
 ```
 
