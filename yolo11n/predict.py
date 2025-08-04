@@ -12,9 +12,9 @@ from ultralytics import YOLO
 class Predictor(BasePredictor):
     """YOLO11n model predictor for Replicate deployment."""
 
-    def setup(self, weights="yolo11n.pt") -> None:
+    def setup(self, weights=None) -> None:
         """Load YOLO model into memory."""
-        self.model = YOLO(weights)  # Use PyTorch model
+        self.model = YOLO("yolo11n.pt")  # Use PyTorch model
 
     def predict(
         self,
