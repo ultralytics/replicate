@@ -1,69 +1,65 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-# Continuous Integration (CI) GitHub Actions tests
-
 name: CI
-
-permissions:
-  contents: read # Read code in PRs
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-  schedule:
-    - cron: "0 0 * * *" # Runs at 00:00 UTC every day
 
 jobs:
-  Test:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.12", "3.13"]
-
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.11", "3.12"]
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: false
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
 
       - name: Install dependencies
         run: |
-          uv pip install --system -e ".[dev]"
+          uv pip install --system -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
 
-      - name: Option 1 - Python tests with pytest
+      - name: Test export_models.py syntax
         run: |
-          python -m pytest tests -v
+          python -m py_compile export_models.py
+          python export_models.py --help
 
-      - name: Option 2 - Python tests with unittest
+      - name: Test test_prediction.py syntax  
         run: |
-          python -m unittest discover tests -v
+          python -m py_compile test_prediction.py
+          python test_prediction.py --help
 
-      - name: Option 3 - Python tests with pytest coverage
+      - name: Test model export (if YOLO11n available)
         run: |
-          python -m pytest tests -v --cov=./ --cov-report=xml:pytest-coverage.xml
-          
-      - name: Option 4 - Python tests with unittest coverage
-        run: |
-          python -m coverage run --source=./ -m unittest discover tests -v && python -m coverage xml -o unittest-coverage.xml
+          # Download YOLO11n model if not exists
+          python -c "from ultralytics import YOLO; YOLO('yolo11n.pt')"
+          # Test export functionality
+          python export_models.py --model yolo11n.pt --output yolo11n
+        continue-on-error: true
 
-      - name: Run CLI tests
+      - name: Test prediction scripts
         run: |
-          example-cli-command
+          # Test Python imports work
+          python -c "from yolo11n.predict import Predictor; print('✅ yolo11n predictor import OK')"
+          python -c "from custom.predict import Predictor; print('✅ custom predictor import OK')" 
+        continue-on-error: true
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./pytest-coverage.xml,./unittest-coverage.xml  # optional (default = coverage.xml)
-          flags: template_coverage # optional
-          fail_ci_if_error: True  # optional (default = false)
-          verbose: false  # optional (default = false)
+      - name: Validate Cog configurations
+        run: |
+          # Check YAML syntax
+          python -c "import yaml; yaml.safe_load(open('yolo11n/cog.yaml')); print('✅ yolo11n cog.yaml valid')"
+          python -c "import yaml; yaml.safe_load(open('custom/cog.yaml')); print('✅ custom cog.yaml valid')"

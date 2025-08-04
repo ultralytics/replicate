@@ -1,0 +1,13 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+build:
+  gpu: true
+  python_version: "3.11"
+  python_packages:
+    - "ultralytics>=8.3.0"
+    - "torch>=2.0.0"
+    - "torchvision"
+    - "pillow"
+
+predict: "predict.py:Predictor"
+image: "r8.im/your-username/your-custom-model"
