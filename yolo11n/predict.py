@@ -25,10 +25,10 @@ class Predictor(BasePredictor):
     ) -> Dict[str, Any]:
         """Run inference and return annotated JPEG plus JSON detections."""
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
-        detections = json.loads(result.to_json())
+        result_json = json.loads(result.to_json())
 
         with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
             output_path = PathLib(f.name)
             result.save(str(output_path))
 
-        return {"image": Path(output_path), "detections": detections}
+        return {"image": Path(output_path), "results": result_json}
