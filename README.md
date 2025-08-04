@@ -5,7 +5,6 @@
 Deploy YOLO models to Replicate with ready-to-use Cog configurations and automated CI/CD workflows.
 
 [![Push YOLO to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
-[![Push All YOLO Models](https://github.com/ultralytics/replicate/actions/workflows/push-all.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push-all.yml)
 
 [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics)
 [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com/)
