@@ -22,13 +22,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          uv pip install --system -r requirements.txt --index-url https://download.pytorch.org/whl/cpu
 
       - name: Test export_models.py syntax
         run: |
