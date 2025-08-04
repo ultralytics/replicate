@@ -1,4 +1,4 @@
-name: Push YOLO to Replicate
+name: Push YOLO11n to Replicate
 
 on:
   push:
@@ -17,11 +17,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
       - name: Setup uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies
-        run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
+        run: uv pip install --system -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
 
       - name: Setup Cog
         uses: replicate/setup-cog@v2
