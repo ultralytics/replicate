@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  push_to_replicate:
-    name: Push to Replicate
+  build_test_push:
+    name: Build, Test & Push Model
     runs-on: ubuntu-latest
     steps:
       #- name: Cleanup disk space
@@ -44,12 +44,18 @@ jobs:
           echo "Files in yolo11n directory:"
           ls -la yolo11n/
 
-      - name: Test model locally
+      - name: Build model image
+        run: |
+          cd yolo11n
+          cog build
+
+      - name: Test model
         run: |
           cd yolo11n
           cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
 
       - name: Push to Replicate
+        if: github.ref == 'refs/heads/main'
         run: |
           cd yolo11n
           cog push
