@@ -54,12 +54,12 @@ jobs:
       - name: Test prediction scripts
         run: |
           # Test Python imports work
-          python -c "from yolo11n.predict import Predictor; print('✅ yolo11n predictor import OK')"
-          python -c "from custom.predict import Predictor; print('✅ custom predictor import OK')"
+          python -c "from yolo11n.predict import Predictor; print('yolo11n predictor import OK')"
+          python -c "from custom.predict import Predictor; print('custom predictor import OK')" 
         continue-on-error: true
 
       - name: Validate Cog configurations
         run: |
           # Check YAML syntax
-          python -c "import yaml; yaml.safe_load(open('yolo11n/cog.yaml')); print('✅ yolo11n cog.yaml valid')"
-          python -c "import yaml; yaml.safe_load(open('custom/cog.yaml')); print('✅ custom cog.yaml valid')"
+          python -c "import yaml; yaml.safe_load(open('yolo11n/cog.yaml')); print('yolo11n cog.yaml valid')"
+          python -c "import yaml; yaml.safe_load(open('custom/cog.yaml')); print('custom cog.yaml valid')"
