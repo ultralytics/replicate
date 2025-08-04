@@ -35,7 +35,11 @@ jobs:
 
       - name: Download YOLO11n weights
         run: |
-          python -c "from ultralytics import YOLO; YOLO('yolo11n.pt').export(format='onnx', optimize=True, dynamic=True)"
+          python << 'EOF'
+          from ultralytics import YOLO
+          model = YOLO('yolo11n.pt')
+          model.export(format='onnx', optimize=True, dynamic=True)
+          EOF
           mv yolo11n.pt yolo11n.onnx yolo11n/
 
       - name: Push to Replicate
