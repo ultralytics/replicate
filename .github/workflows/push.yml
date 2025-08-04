@@ -3,6 +3,7 @@ name: Push YOLO11n to Replicate
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 jobs:
