@@ -4,11 +4,6 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      model_dir:
-        description: 'Model directory (e.g. "yolo11n" or "custom")'
-        required: true
-        default: "yolo11n"
 
 jobs:
   push_to_replicate:
@@ -24,19 +19,19 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
 
+      - name: Install dependencies
+        run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
+
       - name: Setup Cog
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
 
       - name: Download YOLO11n weights
-        if: ${{ (inputs.model_dir || 'yolo11n') == 'yolo11n' }}
-        run: |
-          uv pip install --system ultralytics
           python -c "from ultralytics import YOLO; YOLO('yolo11n.pt').export(format='onnx', optimize=True, dynamic=True)"
           mv yolo11n.pt yolo11n.onnx yolo11n/
 
       - name: Push to Replicate
         run: |
-          cd ${{ inputs.model_dir || 'yolo11n' }}
+          cd yolo11n
           cog push
