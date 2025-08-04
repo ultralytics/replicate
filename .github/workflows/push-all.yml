@@ -1,11 +1,6 @@
 name: Push All YOLO Models
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'yolo11n/**'
-      - 'custom/**'
   workflow_dispatch:
 
 jobs:
