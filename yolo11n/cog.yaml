@@ -1,13 +1,27 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 build:
-  gpu: true
-  python_version: "3.11"
+  gpu: false
+  python_version: "3.12"
   python_packages:
-    - "ultralytics>=8.3.0"
-    - "torch>=2.0.0"
-    - "torchvision"
-    - "pillow"
-
-predict: "predict.py:Predictor"
-image: "r8.im/ultralytics/yolo11n"
+    - ultralytics>=8.3.0
+    - torch>=2.0.0
+    - torchvision
+    - pillow
+predict: predict.py:Predictor
+image: r8.im/ultralytics/yolo11n
+description:
+  YOLO11n object detection model with 2.6M parameters. Achieves 39.5 mAP50-95
+  on COCO dataset. Optimized for real-time inference with 1.55ms speed.
+github_url: https://github.com/ultralytics/ultralytics
+paper_url: https://docs.ultralytics.com/models/yolo11/
+weights_url: https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt
+license: AGPL-3.0
+cover_image_url: https://raw.githubusercontent.com/ultralytics/assets/main/yolov8/banner-yolov8.png
+examples:
+  - input:
+      image: https://github.com/ultralytics/assets/releases/download/v0.0.0/bus.jpg
+      conf: 0.25
+      iou: 0.45
+      imgsz: 640
+    output: https://github.com/ultralytics/assets/releases/download/v0.0.0/bus-detected.jpg

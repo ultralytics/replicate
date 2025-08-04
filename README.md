@@ -32,7 +32,6 @@ ultralytics/replicate/
 │
 ├── .github/workflows/        # Automated deployment
 │   ├── push.yml              # Manual model push
-│   ├── push-all.yml          # Push all models
 │   ├── ci.yml                # Code quality checks
 │   └── format.yml            # Code formatting
 │

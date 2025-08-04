@@ -55,7 +55,7 @@ jobs:
         run: |
           # Test Python imports work
           python -c "from yolo11n.predict import Predictor; print('yolo11n predictor import OK')"
-          python -c "from custom.predict import Predictor; print('custom predictor import OK')" 
+          python -c "from custom.predict import Predictor; print('custom predictor import OK')"
         continue-on-error: true
 
       - name: Validate Cog configurations
