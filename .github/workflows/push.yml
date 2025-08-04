@@ -1,23 +1,29 @@
-name: Push YOLO to Replicate
+name: Push YOLO11n to Replicate
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  push_to_replicate:
-    name: Push to Replicate
+  build_test_push:
+    name: Build, Test & Push Model
     runs-on: ubuntu-latest
     steps:
-      - name: Cleanup disk space
-        uses: ultralytics/actions/cleanup-disk@main
+      #- name: Cleanup disk space
+      #  uses: ultralytics/actions/cleanup-disk@main
 
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
       - name: Setup uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies
         run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
@@ -28,10 +34,28 @@ jobs:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
 
       - name: Download YOLO11n weights
-          python -c "from ultralytics import YOLO; YOLO('yolo11n.pt').export(format='onnx', optimize=True, dynamic=True)"
-          mv yolo11n.pt yolo11n.onnx yolo11n/
+        run: |
+          python << 'EOF'
+          from ultralytics import YOLO
+          model = YOLO('yolo11n.pt')
+          EOF
+          ls -la yolo11n*
+          mv yolo11n.pt yolo11n/
+          echo "Files in yolo11n directory:"
+          ls -la yolo11n/
+
+      - name: Build model image
+        run: |
+          cd yolo11n
+          cog build
+
+      - name: Test model
+        run: |
+          cd yolo11n
+          cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
 
       - name: Push to Replicate
+        if: github.ref == 'refs/heads/main'
         run: |
           cd yolo11n
           cog push

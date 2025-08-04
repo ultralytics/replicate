@@ -27,39 +27,24 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies
         run: |
           uv pip install --system -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
-
-      - name: Test export_models.py syntax
-        run: |
-          python -m py_compile export_models.py
-          python export_models.py --help
 
       - name: Test test_prediction.py syntax
         run: |
           python -m py_compile test_prediction.py
           python test_prediction.py --help
 
-      - name: Test model export (if YOLO11n available)
+      - name: Test prediction script
         run: |
-          # Download YOLO11n model if not exists
-          python -c "from ultralytics import YOLO; YOLO('yolo11n.pt')"
-          # Test export functionality
-          python export_models.py --model yolo11n.pt --output yolo11n
-        continue-on-error: true
-
-      - name: Test prediction scripts
-        run: |
-          # Test Python imports work
+          # Test Python import works
           python -c "from yolo11n.predict import Predictor; print('yolo11n predictor import OK')"
-          python -c "from custom.predict import Predictor; print('custom predictor import OK')"
         continue-on-error: true
 
-      - name: Validate Cog configurations
+      - name: Validate Cog configuration
         run: |
           # Check YAML syntax
           python -c "import yaml; yaml.safe_load(open('yolo11n/cog.yaml')); print('yolo11n cog.yaml valid')"
-          python -c "import yaml; yaml.safe_load(open('custom/cog.yaml')); print('custom cog.yaml valid')"

@@ -28,7 +28,6 @@ ultralytics/replicate/
 │   ├── ci.yml                # Code quality checks
 │   └── format.yml            # Code formatting
 │
-├── export_models.py          # Model export utility
 ├── test_prediction.py        # Local testing utility
 ├── requirements.txt          # Dependencies
 ├── LICENSE                   # AGPL-3.0 license
@@ -83,13 +82,14 @@ pip install -r requirements.txt
 - **Performance**: 39.5 mAP50-95 on COCO dataset
 - **Speed**: Optimized for real-time inference
 
-## 🔧 Model Export Utility
+## 🔧 Model Setup
 
-Use the included export script:
+The model will be automatically downloaded by ultralytics when needed:
 
-```bash
-# Export YOLO11n model
-python export_models.py --model yolo11n.pt --output yolo11n/
+```python
+from ultralytics import YOLO
+
+model = YOLO("yolo11n.pt")  # Downloads automatically if not present
 ```
 
 ## 🧪 Local Testing
@@ -103,7 +103,7 @@ python test_prediction.py --model yolo11n --image test.jpg
 
 ## 🚀 Features
 
-- **🏎️ Optimized**: ONNX model for GPU-agnostic inference
+- **🏎️ Optimized**: PyTorch model for fast inference
 - **🤖 Automated**: GitHub Actions for CI/CD
 - **📦 Ready-to-use**: Pre-configured YOLO11n deployment
 - **📊 Scalable**: Auto-scaling Replicate infrastructure
