@@ -31,7 +31,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip install --system -r requirements.txt --index-url https://download.pytorch.org/whl/cpu
+          uv pip install --system -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
 
       - name: Test export_models.py syntax
         run: |
