@@ -10,13 +10,13 @@ predict: predict.py:Predictor
 image: r8.im/your-username/your-custom-model
 description: Custom YOLO11 model trained on specialized dataset. Deploy your own fine-tuned
   YOLO model for domain-specific object detection tasks.
-github_url: https://github.com/ultralytics/replicate
+github_url: https://github.com/ultralytics/ultralytics
 paper_url: https://docs.ultralytics.com/models/yolo11/
 license: AGPL-3.0
-cover_image_url: https://raw.githubusercontent.com/ultralytics/assets/main/yolo11/yolo11-comparison-plots.png
+cover_image_url: https://raw.githubusercontent.com/ultralytics/assets/main/yolov8/banner-yolov8.png
 examples:
 - input:
-    image: https://raw.githubusercontent.com/ultralytics/assets/main/im/bus.jpg
+    image: https://github.com/ultralytics/assets/releases/download/v0.0.0/bus.jpg
     conf: 0.25
     iou: 0.45
     imgsz: 640
