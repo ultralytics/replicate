@@ -8,6 +8,8 @@ from ultralytics import YOLO
 
 
 class Predictor(BasePredictor):
+    """YOLO11n model predictor for Replicate deployment."""
+
     def setup(self):
         """Load YOLO model into memory."""
         # Use ONNX for GPU-agnostic acceleration
