@@ -31,9 +31,7 @@ class Predictor(BasePredictor):
             result.save(str(output_path))
 
         output = {"image": output_path}
-
         if return_json:
-            results = json.loads(result.to_json())
-            output["results"] = results
+            output["results"] = json.loads(result.to_json())
 
         return output
