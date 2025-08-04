@@ -14,12 +14,6 @@ jobs:
           - dir: custom
             model: your-username/your-custom-model
     steps:
-      - name: Free disk space
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          tool-cache: false
-          docker-images: false
-
       - name: Checkout
         uses: actions/checkout@v4
 

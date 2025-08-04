@@ -16,7 +16,6 @@ jobs:
     name: Push to Replicate
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -28,4 +27,4 @@ jobs:
       - name: Push to Replicate
         run: |
           cd ${{ inputs.model_dir || 'yolo11n' }}
-          cog push r8.im/${{ inputs.model_name || vars.DEFAULT_MODEL_NAME }}
+          cog push r8.im/${{ inputs.model_name || 'ultralytics/yolo11n' }}
