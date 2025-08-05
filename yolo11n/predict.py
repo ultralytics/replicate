@@ -26,7 +26,7 @@ class Predictor(BasePredictor):
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
         image_path = "output.png"
         result.save(image_path)
-        
+
         if return_json:
             return {"image": image_path, "results": json.loads(result.to_json())}
         else:
