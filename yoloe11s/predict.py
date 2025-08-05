@@ -1,12 +1,16 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 from typing import Optional
+
+from cog import BaseModel, BasePredictor, Input, Path
 from ultralytics import YOLO
-from cog import BasePredictor, Input, Path, BaseModel
+
 
 class Output(BaseModel):
     image: Optional[Path] = None
     json_str: Optional[str] = None
+
+
 class Predictor(BasePredictor):
     """YOLOE: Real-Time Seeing Anything model predictor for Replicate deployment."""
 
@@ -34,16 +38,12 @@ class Predictor(BasePredictor):
         return_json: bool = Input(description="Return detection results as JSON", default=False),
     ) -> Output:
         """Run inference and return annotated image with optional JSON results."""
-        
         self.re_init_model(class_names)
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
         image_path = "output.png"
         result.save(image_path)
 
         if return_json:
-            return Output(
-                image=Path(image_path), 
-                json_str=result.to_json()
-            )
+            return Output(image=Path(image_path), json_str=result.to_json())
         else:
             return Output(image=Path(image_path))
