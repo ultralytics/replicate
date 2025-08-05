@@ -44,6 +44,8 @@ jobs:
         run: |
           python << 'EOF'
           from ultralytics import YOLO
+          from ultralytics.utils.downloads import attempt_download_asset
+          attempt_download_asset("mobileclip_blt.ts")
           model = YOLO('yoloe-11s-seg.pt')
           EOF
           ls -la yoloe11s*
