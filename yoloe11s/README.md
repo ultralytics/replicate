@@ -1,19 +1,19 @@
-# YOLO11n Demo Deployment
+# YOLOE-11S Demo Deployment
 
-Deploy the official YOLO11n model to Replicate with PyTorch inference at https://replicate.com/ultralytics/yoloe11s.
+Deploy the official YOLOE-11S model to Replicate with PyTorch inference at <https://replicate.com/ultralytics/yoloe-11s>.
 
 ## Setup
 
 1. **Deploy to Replicate:**
 
    ```bash
-   cog push r8.im/ultralytics/yoloe11s
+   cog push r8.im/ultralytics/yoloe-11s
    ```
 
 ## Model Details
 
-- **Model**: YOLE11s (Small)
-- **Parameters**: 2.6M
+- **Model**: YOLOE-11S (Small)
+- **Parameters**: 10.2M
 - **Format**: PyTorch (.pt)
 - **Use Case**: Demonstration of official Ultralytics model deployment
 

@@ -3,10 +3,12 @@
 from typing import Optional
 
 from cog import BaseModel, BasePredictor, Input, Path
-from ultralytics import YOLO
+from ultralytics import YOLOE
 
 
 class Output(BaseModel):
+    """Output model for predictions."""
+
     image: Optional[Path] = None
     json_str: Optional[str] = None
 
@@ -16,14 +18,17 @@ class Predictor(BasePredictor):
 
     def setup(self) -> None:
         """Load YOLOE-11S model into memory."""
-        self.model = YOLO("yoloe-11s-seg.pt")
+        self.model = YOLOE("yoloe-11s-seg.pt")
 
     def re_init_model(self, class_names: str) -> None:
         """Re-Initialize model with class names."""
-        self.model = YOLO("yoloe-11s-seg.pt")
         if class_names.strip() != "":
+            self.model = YOLOE("yoloe-11s-seg.pt")
             class_list = class_names.split(", ")
             self.model.set_classes(class_list, self.model.get_text_pe(class_list))
+        else:
+            # Load YOLOE-11s model prompt free model into memory
+            self.model = YOLOE("yoloe-11s-seg-pf.pt")
 
     def predict(
         self,

@@ -7,6 +7,8 @@ from ultralytics import YOLO
 
 
 class Output(BaseModel):
+    """Output model for predictions."""
+
     image: Optional[Path] = None
     json_str: Optional[str] = None
 
