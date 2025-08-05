@@ -27,7 +27,7 @@ class Predictor(BasePredictor):
         image_path = "output.png"
         result.save(image_path)
 
-        output = {"image": Path(image_path)}
+        output = {"media_path": Path(image_path)}
         if return_json:
             output["results"] = json.loads(result.to_json())
 
