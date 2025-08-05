@@ -1,8 +1,6 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
-
 import json
 from typing import Any, Dict
-
 from cog import BasePredictor, File, Input, Path
 from ultralytics import YOLO
 
@@ -26,8 +24,9 @@ class Predictor(BasePredictor):
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
         image_path = "output.png"
         result.save(image_path)
-
+        
+        output_file = File(open(image_path, "rb"))
         if return_json:
-            return {"image": File(image_path), "results": json.loads(result.to_json())}
+            return {"image": output_file, "results": json.loads(result.to_json())}
         else:
-            return {"image": File(image_path)}
+            return {"image": output_file}
