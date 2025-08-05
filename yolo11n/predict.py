@@ -1,11 +1,14 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import json
-import tempfile
-from typing import Any, Dict
-
-from cog import BasePredictor, Input, Path
+from typing import Optional
 from ultralytics import YOLO
+from cog import BasePredictor, Input, Path, BaseModel
+
+
+class Output(BaseModel):
+    image: Optional[Path] = None
+    json_str: Optional[str] = None
 
 
 class Predictor(BasePredictor):
@@ -21,17 +24,17 @@ class Predictor(BasePredictor):
         conf: float = Input(description="Confidence threshold", default=0.25, ge=0.0, le=1.0),
         iou: float = Input(description="IoU threshold for NMS", default=0.45, ge=0.0, le=1.0),
         imgsz: int = Input(description="Image size", default=640, choices=[320, 416, 512, 640, 832, 1024, 1280]),
-        return_json: bool = Input(description="Return detection results as JSON", default=True),
-    ) -> Dict[str, Any]:
+        return_json: bool = Input(description="Return detection results as JSON", default=False),
+    ) -> Output:
         """Run inference and return annotated image with optional JSON results."""
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
+        image_path = "output.png"
+        result.save(image_path)
 
-        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
-            output_path = Path(f.name)
-            result.save(str(output_path))
-
-        output = {"image": output_path}
         if return_json:
-            output["results"] = json.loads(result.to_json())
-
-        return output
+            return Output(
+                image=Path(image_path), 
+                json_str=result.to_json()
+            )
+        else:
+            return Output(image=Path(image_path))
