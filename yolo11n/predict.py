@@ -28,6 +28,6 @@ class Predictor(BasePredictor):
         result.save(image_path)
 
         if return_json:
-            return {"image": Path(image_path), "results": json.loads(result.to_json()}
+            return {"image": Path(image_path), "results": json.loads(result.to_json())}
         else:
             return Path(image_path)
