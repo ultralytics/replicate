@@ -2,6 +2,7 @@
 
 import json
 from typing import Any, Dict
+
 from cog import BasePredictor, File, Input, Path
 from ultralytics import YOLO
 
@@ -25,7 +26,7 @@ class Predictor(BasePredictor):
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
         image_path = "output.png"
         result.save(image_path)
-        
+
         if return_json:
             return {"image": File(image_path), "results": json.loads(result.to_json())}
         else:
