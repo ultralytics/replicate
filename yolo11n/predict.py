@@ -1,7 +1,6 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import json
-import tempfile
 from typing import Any, Dict
 
 from cog import BasePredictor, Input, Path
@@ -25,12 +24,10 @@ class Predictor(BasePredictor):
     ) -> Dict[str, Any]:
         """Run inference and return annotated image with optional JSON results."""
         result = self.model(str(image), conf=conf, iou=iou, imgsz=imgsz)[0]
+        image_path = "output.png"
+        result.save(image_path)
 
-        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
-            output_path = Path(f.name)
-            result.save(str(output_path))
-
-        output = {"image": output_path}
+        output = {"image": Path(image_path)}
         if return_json:
             output["results"] = json.loads(result.to_json())
 
