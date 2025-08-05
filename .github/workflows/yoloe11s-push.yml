@@ -1,0 +1,69 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+name: Push YOLOE-11S to Replicate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - yoloe11s/**
+  pull_request:
+    branches: [main]
+    paths:
+      - yoloe11s/**
+  workflow_dispatch:
+
+jobs:
+  build_test_push:
+    name: Build, Test & Push Model
+    runs-on: ubuntu-latest
+    steps:
+      #- name: Cleanup disk space
+      #  uses: ultralytics/actions/cleanup-disk@main
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
+
+      - name: Setup Cog
+        uses: replicate/setup-cog@v2
+        with:
+          token: ${{ secrets.REPLICATE_API_TOKEN }}
+
+      - name: Download YOLOE-11S weights
+        run: |
+          python << 'EOF'
+          from ultralytics import YOLO
+          model = YOLO('yoloe-11s-seg.pt')
+          EOF
+          ls -la yoloe11s*
+          mv yoloe-11s-seg.pt yoloe11s/
+          mv mobileclip_blt.ts yoloe11s/
+          echo "Files in yoloe11s directory:"
+          ls -la yoloe11s/
+
+      - name: Build model image
+        run: |
+          cd yoloe11s
+          cog build
+
+      - name: Test model
+        run: |
+          cd yoloe11s
+          cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
+
+      - name: Push to Replicate
+        if: github.ref == 'refs/heads/main'
+        run: |
+          cd yoloe11s
+          cog push

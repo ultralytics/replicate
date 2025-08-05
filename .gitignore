@@ -182,3 +182,25 @@ weights/
 *_openvino_model/
 *_paddle_model/
 pnnx*
+*.ts
+
+# Replicate deployment folder and files
+cog.json
+cog.lock
+.cog
+
+# Ignore Picture files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmps
+
+# Ignore video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.flv
+*.wmv

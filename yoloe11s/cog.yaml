@@ -1,0 +1,20 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+build:
+  gpu: false
+  python_version: "3.12"
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "ffmpeg"
+  python_packages:
+    - "ultralytics>=8.3.0"
+    - "torch==2.3.1"
+    - "torchvision"
+    - "numpy>=1.24.0"
+    - "opencv-python"
+    - "pillow"
+    - "clip @ git+https://github.com/ultralytics/CLIP.git@main#egg=clip"
+
+predict: predict.py:Predictor
+image: r8.im/ultralytics/yoloe-11s
