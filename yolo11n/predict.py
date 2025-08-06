@@ -1,9 +1,9 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-import json
 from typing import Optional
+
+from cog import BaseModel, BasePredictor, Input, Path
 from ultralytics import YOLO
-from cog import BasePredictor, Input, Path, BaseModel
 
 
 class Output(BaseModel):
@@ -32,9 +32,6 @@ class Predictor(BasePredictor):
         result.save(image_path)
 
         if return_json:
-            return Output(
-                image=Path(image_path), 
-                json_str=result.to_json()
-            )
+            return Output(image=Path(image_path), json_str=result.to_json())
         else:
             return Output(image=Path(image_path))
