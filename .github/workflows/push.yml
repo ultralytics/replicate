@@ -13,46 +13,33 @@ jobs:
   build_test_push:
     name: Build, Test & Push Model
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        model: [yolo11n]
     steps:
-      #- name: Cleanup disk space
-      #  uses: ultralytics/actions/cleanup-disk@main
-
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
-
       - name: Setup uv
         uses: astral-sh/setup-uv@v6
-
       - name: Install dependencies
         run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
-
       - name: Setup Cog
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
-
       - name: Download YOLO11n weights
-        run: |
-          python << 'EOF'
-          from ultralytics import YOLO
-          model = YOLO('yolo11n.pt')
-          EOF
-          ls -la yolo11n*
-          mv yolo11n.pt yolo11n/
-          echo "Files in yolo11n directory:"
-          ls -la yolo11n/
-
+        run: python ${{ matrix.model }}/download.py
       - name: Build model image
-        run: cog build yolo11n
-
+        working-directory: ${{ matrix.model }}
+        run: cog build
       - name: Test model
-        run: cog predict yolo11n -i image=@assets/bus.jpg -i conf=0.25 -i iou=0.45
-
+        working-directory: ${{ matrix.model }}
+        run: cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
       - name: Push to Replicate
         if: github.ref == 'refs/heads/main'
-        run: cog push yolo11n
+        working-directory: ${{ matrix.model }}
+        run: cog push
