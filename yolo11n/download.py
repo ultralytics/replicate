@@ -7,7 +7,8 @@ from ultralytics import YOLO
 
 def main():
     """Download YOLO11n weights and move to model directory."""
-    YOLO(Path(__file__).parent / "yolo11n.pt")
+    current_dir = Path(__file__).parent
+    YOLO(current_dir / "yolo11n.pt")
 
     # List files in model directory
     print(f"Files in {current_dir.name} directory:")
