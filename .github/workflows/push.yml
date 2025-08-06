@@ -31,7 +31,7 @@ jobs:
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
-      - name: Download YOLO11n weights
+      - name: Download model weights
         run: python ${{ matrix.model }}/download.py
       - name: Build model image
         working-directory: ${{ matrix.model }}
