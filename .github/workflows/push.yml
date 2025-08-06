@@ -48,17 +48,11 @@ jobs:
           ls -la yolo11n/
 
       - name: Build model image
-        run: |
-          cd yolo11n
-          cog build
+        run: cog build yolo11n
 
       - name: Test model
-        run: |
-          cd yolo11n
-          cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
+        run: cog predict yolo11n -i image=@assets/bus.jpg -i conf=0.25 -i iou=0.45
 
       - name: Push to Replicate
         if: github.ref == 'refs/heads/main'
-        run: |
-          cd yolo11n
-          cog push
+        run: cog push yolo11n
