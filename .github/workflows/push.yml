@@ -1,16 +1,12 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-name: Push YOLO11n to Replicate
+name: Push YOLO to Replicate
 
 on:
   push:
     branches: [main]
-    paths:
-      - yolo11n/**
   pull_request:
     branches: [main]
-    paths:
-      - yolo11n/**
   workflow_dispatch:
 
 jobs:
@@ -19,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        model: [yolo11n]
+        model: [yolo11n,yolov8s-worldv2,yolov8s-worldv2]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,7 +31,7 @@ jobs:
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
-      - name: Download YOLO11n weights
+      - name: Download model weights
         run: python ${{ matrix.model }}/download.py
       - name: Build model image
         working-directory: ${{ matrix.model }}
