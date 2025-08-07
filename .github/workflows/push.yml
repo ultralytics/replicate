@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        model: [yolo11n,yolov8s-worldv2]
+        model: [yolo11n,yolov8s-worldv2,yoloe11s]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
