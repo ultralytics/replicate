@@ -9,11 +9,6 @@ build:
     - "ffmpeg"
   python_packages:
     - "ultralytics>=8.3.0"
-    - "torch==2.3.1"
-    - "torchvision"
-    - "numpy>=1.24.0"
-    - "opencv-python"
-    - "pillow"
     - "clip @ git+https://github.com/ultralytics/CLIP.git@main#egg=clip"
 
 predict: predict.py:Predictor
