@@ -9,11 +9,6 @@ build:
     - "ffmpeg"
   python_packages:
     - "ultralytics>=8.3.0"
-    - "torch==2.3.1"
-    - "torchvision"
-    - "numpy>=1.24.0"
-    - "opencv-python"
-    - "pillow"
 
 predict: predict.py:Predictor
 image: r8.im/ultralytics/yolo11n
