@@ -22,13 +22,14 @@ class Predictor(BasePredictor):
 
     def re_init_model(self, class_names: str) -> None:
         """Re-Initialize model with class names."""
-        if class_names.strip() != "":
+        if not class_names.strip():
+            # Load YOLOE-11s model prompt free model into memory
+            self.model = YOLOE("yoloe-11s-seg-pf.pt")
+
+        else:
             self.model = YOLOE("yoloe-11s-seg.pt")
             class_list = class_names.split(", ")
             self.model.set_classes(class_list, self.model.get_text_pe(class_list))
-        else:
-            # Load YOLOE-11s model prompt free model into memory
-            self.model = YOLOE("yoloe-11s-seg-pf.pt")
 
     def predict(
         self,
