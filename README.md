@@ -57,7 +57,7 @@ cog push r8.im/ultralytics/yolo11n
 
 1. **Setup secrets:**
    - Go to repository Settings → Secrets → Actions
-   - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/signin?next=/auth/token)
+   - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
 
 2. **Deploy:**
    - **Manual**: Actions tab → "Push YOLO11n to Replicate" → Run workflow
