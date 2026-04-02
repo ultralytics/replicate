@@ -1,6 +1,6 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-from typing import Optional
+from __future__ import annotations
 
 from cog import BaseModel, BasePredictor, Input, Path
 from ultralytics import YOLOWorld
@@ -9,8 +9,8 @@ from ultralytics import YOLOWorld
 class Output(BaseModel):
     """Output model for predictions."""
 
-    image: Optional[Path] = None
-    json_str: Optional[str] = None
+    image: Path | None = None
+    json_str: str | None = None
 
 
 class Predictor(BasePredictor):
