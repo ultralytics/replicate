@@ -2,6 +2,9 @@
 
 name: Push YOLO to Replicate
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main]
