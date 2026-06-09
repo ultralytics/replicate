@@ -6,6 +6,7 @@ Deploy YOLO11n to Replicate at https://replicate.com/ultralytics/yolo11n with re
 
 [![Push YOLO11n to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
 [![Ultralytics Actions](https://github.com/ultralytics/replicate/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/format.yml)
+[![Codecov](https://codecov.io/github/ultralytics/replicate/branch/main/graph/badge.svg)](https://app.codecov.io/github/ultralytics/replicate)
 
 [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics)
 [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com/)
