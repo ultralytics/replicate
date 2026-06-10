@@ -2,9 +2,9 @@
 
 # 🚀 Ultralytics Replicate
 
-Deploy YOLO11n to Replicate at https://replicate.com/ultralytics/yolo11n with ready-to-use Cog configuration and automated CI/CD workflow.
+Deploy Ultralytics YOLO models to Replicate with ready-to-use Cog configurations and automated CI/CD workflows.
 
-[![Push YOLO11n to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
+[![Push YOLO to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
 [![Ultralytics Actions](https://github.com/ultralytics/replicate/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/format.yml)
 [![Codecov](https://codecov.io/github/ultralytics/replicate/branch/main/graph/badge.svg)](https://app.codecov.io/github/ultralytics/replicate)
 
@@ -16,7 +16,8 @@ Deploy YOLO11n to Replicate at https://replicate.com/ultralytics/yolo11n with re
 
 ## 🗂️ Repository Structure
 
-This repository provides optimized Replicate deployment for the YOLO11n model with automated CI/CD workflow.
+This repository provides optimized Replicate deployments for YOLO11n, YOLOv8s WorldV2, and YOLOE-11S models with an
+automated CI/CD workflow.
 
 ```plaintext
 ultralytics/replicate/
@@ -25,13 +26,22 @@ ultralytics/replicate/
 │   ├── cog.yaml              # Cog configuration
 │   ├── predict.py            # Prediction interface
 │   └── README.md             # Model documentation
+├── yolov8s-worldv2/          # YOLOv8s WorldV2 model deployment
+│   ├── cog.yaml              # Cog configuration
+│   ├── predict.py            # Prediction interface
+│   └── README.md             # Model documentation
+├── yoloe11s/                 # YOLOE-11S model deployment
+│   ├── cog.yaml              # Cog configuration
+│   ├── predict.py            # Prediction interface
+│   └── README.md             # Model documentation
+├── assets/                   # Sample images for workflow smoke tests
 │
 ├── .github/workflows/        # Automated deployment
 │   ├── push.yml              # Model deployment workflow
 │   ├── ci.yml                # Code quality checks
 │   └── format.yml            # Code formatting
 │
-├── test_prediction.py        # Local testing utility
+├── test_prediction.py        # Local YOLO11n testing utility
 ├── requirements.txt          # Dependencies
 ├── LICENSE                   # AGPL-3.0 license
 └── README.md                 # This file
@@ -39,19 +49,29 @@ ultralytics/replicate/
 
 ## ⚡ Quick Start
 
-### Deploy YOLO11n Model
+### Deploy a Model
 
-Model will deploy to https://replicate.com/ultralytics/yolo11n:
+Models deploy to the corresponding Replicate endpoints:
 
 ```bash
 # Clone repository
 git clone https://github.com/ultralytics/replicate.git
 cd replicate
 
-# Deploy to Replicate
+# Deploy YOLO11n
 cd yolo11n
+python download.py
 cog login
 cog push r8.im/ultralytics/yolo11n
+
+# Or deploy another configured model
+cd ../yolov8s-worldv2
+python download.py
+cog push r8.im/ultralytics/yolov8s-worldv2
+
+cd ../yoloe11s
+python download.py
+cog push r8.im/ultralytics/yoloe-11s
 ```
 
 ### Automated Deployment with GitHub Actions
@@ -61,8 +81,8 @@ cog push r8.im/ultralytics/yolo11n
    - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
 
 2. **Deploy:**
-   - **Manual**: Actions tab → "Push YOLO11n to Replicate" → Run workflow
-   - **Automatic**: Push changes to `main` branch auto-deploys
+   - **Manual**: Actions tab → "Push YOLO to Replicate" → Run workflow
+   - **Automatic**: Push changes to `main` builds, tests, and deploys each configured model
 
 ## 🛠️ Installation
 
@@ -79,22 +99,22 @@ For local development and testing:
 pip install -r requirements.txt
 ```
 
-## 🎯 YOLO11n Model
+## 🎯 Available Models
 
-- **Purpose**: Official YOLO11n object detection
-- **Parameters**: 2.6M parameters
-- **Classes**: 80 COCO classes
-- **Performance**: 39.5 mAP50-95 on COCO dataset
-- **Speed**: Optimized for real-time inference
+| Directory          | Replicate model                     | Predictor   | Notes                                                  |
+| ------------------ | ----------------------------------- | ----------- | ------------------------------------------------------ |
+| `yolo11n/`         | `r8.im/ultralytics/yolo11n`         | `YOLO`      | Official YOLO11n object detection model                |
+| `yolov8s-worldv2/` | `r8.im/ultralytics/yolov8s-worldv2` | `YOLOWorld` | Open-vocabulary YOLOv8s WorldV2 model                  |
+| `yoloe11s/`        | `r8.im/ultralytics/yoloe-11s`       | `YOLOE`     | YOLOE-11S segmentation model with class prompt support |
 
 ## 🔧 Model Setup
 
-The model will be automatically downloaded by ultralytics when needed:
+Each model directory includes a `download.py` script used by the deployment workflow before `cog build`:
 
-```python
-from ultralytics import YOLO
-
-model = YOLO("yolo11n.pt")  # Downloads automatically if not present
+```bash
+python yolo11n/download.py
+python yolov8s-worldv2/download.py
+python yoloe11s/download.py
 ```
 
 ## 🧪 Local Testing
@@ -103,16 +123,17 @@ Test the model locally before deploying:
 
 ```bash
 # Test YOLO11n
-python test_prediction.py --model yolo11n --image test.jpg
+python yolo11n/download.py
+python test_prediction.py --model yolo11n --image assets/bus.jpg
 ```
 
 ## 🚀 Features
 
 - **🏎️ Optimized**: PyTorch model for fast inference
 - **🤖 Automated**: GitHub Actions for CI/CD
-- **📦 Ready-to-use**: Pre-configured YOLO11n deployment
+- **📦 Ready-to-use**: Pre-configured deployments for multiple YOLO models
 - **📊 Scalable**: Auto-scaling Replicate infrastructure
-- **🎯 Simple**: Single model focus
+- **🎯 Focused**: One Cog configuration per model
 
 ## 💡 Contribute
 

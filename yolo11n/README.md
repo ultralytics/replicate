@@ -23,7 +23,7 @@ Deploy the official YOLO11n model to Replicate with PyTorch inference at https:/
 ## Configuration
 
 - **GPU**: Disabled by default (CPU inference)
-- **Python**: 3.11 with PyTorch 2.0+
+- **Python**: 3.12 with PyTorch 2.0+
 - **Framework**: Ultralytics 8.3+
 - **Input**: Single image with configurable confidence/IoU thresholds
 - **Output**: Annotated image with detected objects
