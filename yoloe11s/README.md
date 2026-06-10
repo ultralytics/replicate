@@ -19,7 +19,7 @@ Deploy the official YOLOE-11S model to Replicate with PyTorch inference at <http
 
 ## Model Files
 
-**Note:** The model weights (`yoloe-11s-seg.pt`) and (`mobileclip_blt.ts`) will be automatically downloaded by ultralytics when the container starts.
+**Note:** The model weights (`yoloe-11s-seg.pt` and `yoloe-11s-seg-pf.pt`) will be downloaded before the container builds.
 
 ## Configuration
 
