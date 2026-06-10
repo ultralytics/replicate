@@ -19,7 +19,8 @@ Deploy the official YOLOE-11S model to Replicate with PyTorch inference at <http
 
 ## Model Files
 
-**Note:** The model weights (`yoloe-11s-seg.pt` and `yoloe-11s-seg-pf.pt`) will be downloaded before the container builds.
+**Note:** `download.py` stages the YOLOE weights (`yoloe-11s-seg.pt` and `yoloe-11s-seg-pf.pt`) before the container builds.
+The Cog environment installs the CLIP dependency configured in `cog.yaml` for prompt-based inference.
 
 ## Configuration
 

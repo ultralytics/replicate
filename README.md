@@ -60,14 +60,17 @@ cd replicate
 
 # Deploy YOLO11n
 cd yolo11n
+python download.py
 cog login
 cog push r8.im/ultralytics/yolo11n
 
 # Or deploy another configured model
 cd ../yolov8s-worldv2
+python download.py
 cog push r8.im/ultralytics/yolov8s-worldv2
 
 cd ../yoloe11s
+python download.py
 cog push r8.im/ultralytics/yoloe-11s
 ```
 
