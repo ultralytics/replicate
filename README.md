@@ -98,11 +98,11 @@ pip install -r requirements.txt
 
 ## 🎯 Available Models
 
-| Directory | Replicate model | Predictor | Notes |
-| --- | --- | --- | --- |
-| `yolo11n/` | `r8.im/ultralytics/yolo11n` | `YOLO` | Official YOLO11n object detection model |
-| `yolov8s-worldv2/` | `r8.im/ultralytics/yolov8s-worldv2` | `YOLOWorld` | Open-vocabulary YOLOv8s WorldV2 model |
-| `yoloe11s/` | `r8.im/ultralytics/yoloe-11s` | `YOLOE` | YOLOE-11S segmentation model with class prompt support |
+| Directory          | Replicate model                     | Predictor   | Notes                                                  |
+| ------------------ | ----------------------------------- | ----------- | ------------------------------------------------------ |
+| `yolo11n/`         | `r8.im/ultralytics/yolo11n`         | `YOLO`      | Official YOLO11n object detection model                |
+| `yolov8s-worldv2/` | `r8.im/ultralytics/yolov8s-worldv2` | `YOLOWorld` | Open-vocabulary YOLOv8s WorldV2 model                  |
+| `yoloe11s/`        | `r8.im/ultralytics/yoloe-11s`       | `YOLOE`     | YOLOE-11S segmentation model with class prompt support |
 
 ## 🔧 Model Setup
 
