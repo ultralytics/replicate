@@ -78,7 +78,7 @@ cog push r8.im/ultralytics/yoloe-11s
 
 1. **Setup secrets:**
    - Go to repository Settings → Secrets → Actions
-   - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/auth/token)
+   - Add `REPLICATE_API_TOKEN` with your [Replicate API token](https://replicate.com/signin?next=/auth/token)
 
 2. **Deploy:**
    - **Manual**: Actions tab → "Push YOLO to Replicate" → Run workflow
@@ -141,7 +141,7 @@ Ultralytics thrives on community collaboration, and we deeply value your contrib
 
 - **Reporting Issues**: Encounter a bug? Please report it on [GitHub Issues](https://github.com/ultralytics/replicate/issues).
 - **Feature Requests**: Have an idea for improvement? Share it via [GitHub Issues](https://github.com/ultralytics/replicate/issues).
-- **Pull Requests**: Want to contribute code? Please read our [Contributing Guide](https://docs.ultralytics.com/help/contributing/) first, then submit a Pull Request.
+- **Pull Requests**: Want to contribute code? Please read our [Contributing Guide](https://docs.ultralytics.com/help/contributing) first, then submit a Pull Request.
 - **Feedback**: Share your thoughts and experiences by participating in our official [Survey](https://www.ultralytics.com/survey?utm_source=github&utm_medium=social&utm_campaign=Survey).
 
 A heartfelt thank you 🙏 goes out to all our contributors! Your efforts help make Ultralytics tools better for everyone.
@@ -152,7 +152,7 @@ A heartfelt thank you 🙏 goes out to all our contributors! Your efforts help m
 
 Ultralytics offers two licensing options to accommodate diverse needs:
 
-- **AGPL-3.0 License**: Ideal for students, researchers, and enthusiasts passionate about open collaboration and knowledge sharing. This [OSI-approved](https://opensource.org/license/agpl-v3) open-source license promotes transparency and community involvement. See the [LICENSE](LICENSE) file for details.
+- **AGPL-3.0 License**: Ideal for students, researchers, and enthusiasts passionate about open collaboration and knowledge sharing. This [OSI-approved](https://opensource.org/license/agpl-3.0) open-source license promotes transparency and community involvement. See the [LICENSE](LICENSE) file for details.
 - **Enterprise License**: Designed for commercial applications, this license permits the seamless integration of Ultralytics software and AI models into commercial products and services, bypassing the copyleft requirements of AGPL-3.0. For commercial use cases, please inquire about an [Ultralytics Enterprise License](https://www.ultralytics.com/license).
 
 ## 📮 Contact
