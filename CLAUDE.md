@@ -18,27 +18,30 @@ Each model lives in its own self-contained directory (`yolo11n/`, `yolov8s-world
 All three predictors share the same `Output` model (`image: Path`, `json_str: str`) and the same `predict()` signature (`image`, `conf`, `iou`, `imgsz`, `return_json`; open-vocab models add `class_names`). Inference always saves an annotated `output.png` and optionally attaches `result.to_json()`.
 
 Key difference between models:
+
 - **`yolo11n`** (`YOLO`) — fixed COCO classes. Model loaded once in `setup()`.
 - **`yolov8s-worldv2`** (`YOLOWorld`) and **`yoloe11s`** (`YOLOE`) — open-vocabulary. They define `re_init_model(class_names)`, which **rebuilds the model on every prediction request** to apply the requested classes via `set_classes(...)`. `yoloe11s` additionally falls back to the prompt-free weights (`yoloe-11s-seg-pf.pt`) when `class_names` is empty, so it downloads two `.pt` files.
 
-Gotcha: directory names and Replicate image names don't always match — `yoloe11s/` deploys to `r8.im/ultralytics/yoloe-11s`. `cog push` with no argument uses the `image:` field in that directory's `cog.yaml`, so always run cog commands from inside the model directory.
+Got you: directory names and Replicate image names don't always match — `yoloe11s/` deploys to `r8.im/ultralytics/yoloe-11s`. `cog push` with no argument uses the `image:` field in that directory's `cog.yaml`, so always run cog commands from inside the model directory.
 
 ## Commands
 
 Local test (only `yolo11n` and `custom` are supported by this script):
+
 ```bash
 python yolo11n/download.py
 python test_prediction.py --model yolo11n --image assets/bus.jpg
 ```
 
 Build, test, and deploy a single model (run from inside the model dir):
+
 ```bash
 cd yolo11n
-python download.py            # fetch weights first — build will not download them
+python download.py # fetch weights first — build will not download them
 cog build
 cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
-cog login                     # one-time, needs REPLICATE_API_TOKEN
-cog push                      # pushes to the image: target in cog.yaml
+cog login # one-time, needs REPLICATE_API_TOKEN
+cog push  # pushes to the image: target in cog.yaml
 ```
 
 Install Cog itself (see README for the OS-specific download line). Python deps for local scripts: `pip install -r requirements.txt`.
