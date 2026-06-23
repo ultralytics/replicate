@@ -42,10 +42,6 @@ jobs:
       - name: Test model
         working-directory: ${{ matrix.model }}
         run: cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
-      - name: Test model size selection (temporary, yolo26 only)
-        if: matrix.model == 'yolo26'
-        working-directory: ${{ matrix.model }}
-        run: cog predict -i image=@../assets/bus.jpg -i model_size=x
       - name: Push to Replicate
         if: github.ref == 'refs/heads/main'
         working-directory: ${{ matrix.model }}
