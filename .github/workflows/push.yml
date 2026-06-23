@@ -41,7 +41,7 @@ jobs:
         run: cog build
       - name: Test model
         working-directory: ${{ matrix.model }}
-        run: cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45
+        run: cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45 -i return_json=true
       - name: Push to Replicate
         if: github.ref == 'refs/heads/main'
         working-directory: ${{ matrix.model }}
