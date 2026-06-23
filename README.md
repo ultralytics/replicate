@@ -34,6 +34,10 @@ ultralytics/replicate/
 │   ├── cog.yaml              # Cog configuration
 │   ├── predict.py            # Prediction interface
 │   └── README.md             # Model documentation
+├── yolo26/                   # YOLO26 model deployment (selectable size n/s/m/l/x)
+│   ├── cog.yaml              # Cog configuration
+│   ├── predict.py            # Prediction interface
+│   └── README.md             # Model documentation
 ├── assets/                   # Sample images for workflow smoke tests
 │
 ├── .github/workflows/        # Automated deployment
@@ -106,6 +110,7 @@ pip install -r requirements.txt
 | `yolo11n/`         | `r8.im/ultralytics/yolo11n`         | `YOLO`      | Official YOLO11n object detection model                |
 | `yolov8s-worldv2/` | `r8.im/ultralytics/yolov8s-worldv2` | `YOLOWorld` | Open-vocabulary YOLOv8s WorldV2 model                  |
 | `yoloe11s/`        | `r8.im/ultralytics/yoloe-11s`       | `YOLOE`     | YOLOE-11S segmentation model with class prompt support |
+| `yolo26/`          | `r8.im/ultralytics/yolo26`          | `YOLO`      | YOLO26 detection with runtime size selection (n/s/m/l/x) |
 
 ## 🔧 Model Setup
 
