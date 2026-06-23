@@ -41,7 +41,14 @@ jobs:
         run: cog build
       - name: Test model
         working-directory: ${{ matrix.model }}
-        run: cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45 -i return_json=true
+        # `cog predict` exits 0 even when the prediction raises, so capture output and fail on a traceback.
+        run: |
+          set -o pipefail
+          cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45 -i return_json=true 2>&1 | tee predict.log
+          if grep -q "Traceback (most recent call last)" predict.log; then
+            echo "::error::cog predict raised an exception (see log above)"
+            exit 1
+          fi
       - name: Push to Replicate
         if: github.ref == 'refs/heads/main'
         working-directory: ${{ matrix.model }}
