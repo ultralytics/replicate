@@ -13,6 +13,10 @@ class Output(BaseModel):
     json_str: str | None = None
 
 
+# Resolve PEP 563 string annotations so Cog's pydantic can build the Output schema (Path passed in explicitly).
+Output.update_forward_refs(Path=Path)
+
+
 class Predictor(BasePredictor):
     """YOLOv8s WorldV2 model predictor for Replicate deployment."""
 
