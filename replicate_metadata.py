@@ -11,8 +11,8 @@ For each model directory (discovered from its ``cog.yaml`` ``image:`` target) th
 
 The Replicate API splits writable fields between the two endpoints (see https://replicate.com/docs/reference/http):
 
-- create-only: ``visibility``, ``hardware`` (docs also list ``cover_image_url`` here, but we additionally re-attempt it
-  on update via a separate best-effort PATCH so the logo stays enforced on existing models too)
+- create-only: ``visibility``, ``hardware``, ``cover_image_url`` (NOTE: PATCH accepts cover_image_url with HTTP 200 but
+  silently ignores it — covers can only be set at create time or via the Replicate web UI; see sync() for details)
 - update-only: ``readme``, ``weights_url``
 - either:      ``description``, ``github_url``, ``paper_url``, ``license_url``
 
@@ -47,8 +47,8 @@ YOLO26_PLATFORM_URL = "https://platform.ultralytics.com/ultralytics/yolo26"
 
 # Default cover image for newly created model pages. ``cover_image_url`` takes a URL (Replicate fetches it), not a file
 # upload, so we point at the Ultralytics logo hosted in the public ultralytics/assets repo (stable raw URL, verified
-# HTTP 200 image/png). Set on create AND re-attempted on every update (see sync), so all models — including existing
-# ones and any whose cover drifted to a prediction output — converge on this logo. Per-model SPECS may override.
+# HTTP 200 image/png). create-only: it brands new models at creation; an existing model's cover can only be changed in
+# the Replicate web UI (the API ignores cover_image_url on PATCH — see sync). Per-model SPECS may override.
 COVER_IMAGE_URL = (
     "https://raw.githubusercontent.com/ultralytics/assets/main/yolo/ultralytics_yolo_logomark_blue_512_512.png"
 )
@@ -202,9 +202,7 @@ def sync(owner: str, name: str, model_dir: Path, token: str, dry_run: bool) -> b
 
     if dry_run:
         upd = {k: (f"<{len(v)} chars>" if k == "readme" else v) for k, v in update_payload.items()}
-        cover = create_payload.get("cover_image_url")
         print(f"[dry-run] {slug}\n  create: {json.dumps(create_payload)}\n  update: {json.dumps(upd)}")
-        print(f"  cover-patch: {json.dumps({'cover_image_url': cover})}")
         return True
 
     status, _ = api("GET", f"/models/{slug}", token)
@@ -225,16 +223,10 @@ def sync(owner: str, name: str, model_dir: Path, token: str, dry_run: bool) -> b
     else:  # non-fatal: the model exists/pushes fine even if the page text lagged
         print(f"⚠ {slug}: metadata PATCH failed ({u_status}): {u_body}", file=sys.stderr)
 
-    # cover_image_url is documented as create-only; attempt it on update too as a SEPARATE best-effort request so a
-    # rejection can't block the metadata sync above. Re-asserts the logo on every model each run (resetting a cover that
-    # drifted to a prediction output, and migrating already-existing models to the current logo).
-    cover = create_payload.get("cover_image_url")
-    if cover:
-        c_status, _ = api("PATCH", f"/models/{slug}", token, {"cover_image_url": cover})
-        if c_status == 200:
-            print(f"✓ {slug}: cover_image_url update accepted")
-        else:
-            print(f"⚠ {slug}: cover_image_url update not accepted ({c_status}); set cover in web UI", file=sys.stderr)
+    # DO NOT add cover_image_url to this PATCH. It is create-only: Replicate returns HTTP 200 "accepted" but silently
+    # ignores it, so it looks like it works while changing nothing (verified — PATCHing existing covers to a new logo
+    # left them unchanged on the live pages). cover_image_url only takes effect at model creation (see create_payload)
+    # or via the Replicate web UI. A prior attempt to enforce the logo via a PATCH here was reverted for this reason.
     return True
 
 
