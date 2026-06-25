@@ -41,6 +41,11 @@ jobs:
           python -m py_compile test_prediction.py
           python test_prediction.py --help
 
+      - name: Test replicate_metadata.py syntax
+        run: |
+          python -m py_compile replicate_metadata.py
+          python replicate_metadata.py --dry-run
+
       - name: Test prediction script
         run: |
           # Test Python import works
@@ -49,5 +54,5 @@ jobs:
 
       - name: Validate Cog configuration
         run: |
-          # Check YAML syntax
-          python -c "import yaml; yaml.safe_load(open('yolo11n/cog.yaml')); print('yolo11n cog.yaml valid')"
+          # Check YAML syntax for every model's cog.yaml (flat and nested)
+          python -c "import glob, yaml; [print(yaml.safe_load(open(f)) and f, 'valid') for f in sorted(glob.glob('**/cog.yaml', recursive=True))]"
