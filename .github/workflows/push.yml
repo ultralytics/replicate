@@ -16,6 +16,9 @@ jobs:
   build_test_push:
     name: Build, Test & Push Model
     runs-on: ubuntu-latest
+    env:
+      # Job-level so the composite retry action (Sync metadata) reliably inherits it.
+      REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
@@ -30,16 +33,21 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v6
       - name: Install dependencies
-        run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
+        uses: ultralytics/actions/retry@main
+        with:
+          run: uv pip install --system ultralytics --extra-index-url https://download.pytorch.org/whl/cpu
       - name: Setup Cog
         uses: replicate/setup-cog@v2
         with:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
       - name: Download model weights
-        run: python ${{ matrix.model }}/download.py
+        uses: ultralytics/actions/retry@main
+        with:
+          run: python ${{ matrix.model }}/download.py
       - name: Build model image
-        working-directory: ${{ matrix.model }}
-        run: cog build
+        uses: ultralytics/actions/retry@main
+        with:
+          run: cd ${{ matrix.model }} && cog build
       - name: Test model
         working-directory: ${{ matrix.model }}
         # `cog predict` exits 0 even when the prediction raises, so capture output and fail on a traceback.
@@ -53,10 +61,11 @@ jobs:
       - name: Sync Replicate model metadata
         # Creates the model if missing (so `cog push` succeeds) and syncs description/readme/links/cover.
         if: github.ref == 'refs/heads/main'
-        env:
-          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
-        run: python replicate_metadata.py --dir "${{ matrix.model }}"
+        uses: ultralytics/actions/retry@main
+        with:
+          run: python replicate_metadata.py --dir "${{ matrix.model }}"
       - name: Push to Replicate
         if: github.ref == 'refs/heads/main'
-        working-directory: ${{ matrix.model }}
-        run: cog push
+        uses: ultralytics/actions/retry@main
+        with:
+          run: cd ${{ matrix.model }} && cog push
