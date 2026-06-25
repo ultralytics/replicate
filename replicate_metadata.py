@@ -32,6 +32,8 @@ import urllib.request
 from pathlib import Path
 
 API_BASE = "https://api.replicate.com/v1"
+# The default urllib User-Agent is blocked (HTTP 403) by Replicate's CDN from datacenter IPs (e.g. CI runners).
+USER_AGENT = "ultralytics-replicate-metadata/1.0 (+https://github.com/ultralytics/replicate)"
 
 # Fields shared by every model in this repo.
 GITHUB_URL = "https://github.com/ultralytics/ultralytics"
@@ -141,6 +143,7 @@ def api(method: str, path: str, token: str, body: dict | None = None) -> tuple[i
     req = urllib.request.Request(f"{API_BASE}{path}", data=data, method=method)
     req.add_header("Authorization", f"Bearer {token}")
     req.add_header("Content-Type", "application/json")
+    req.add_header("User-Agent", USER_AGENT)
     try:
         with urllib.request.urlopen(req) as resp:
             return resp.status, _parse(resp.read())
@@ -178,6 +181,19 @@ def build_payloads(owner: str, name: str, model_dir: Path) -> tuple[dict, dict]:
     return create, update
 
 
+def ensure_created(slug: str, create_payload: dict, token: str) -> bool:
+    """Create the model; treat an 'already exists' conflict as success. Return False only on a real create error."""
+    status, body = api("POST", "/models", token, create_payload)
+    if status in (200, 201):
+        print(f"✓ {slug}: created (visibility={VISIBILITY}, hardware={HARDWARE})")
+        return True
+    if status == 409 or "already exists" in json.dumps(body).lower():
+        print(f"• {slug}: exists")
+        return True
+    print(f"✗ {slug}: create failed ({status}): {body}", file=sys.stderr)
+    return False
+
+
 def sync(owner: str, name: str, model_dir: Path, token: str, dry_run: bool) -> bool:
     """Create the model if missing, then patch its metadata. Return False on a fatal (create/get) error."""
     slug = f"{owner}/{name}"
@@ -189,17 +205,16 @@ def sync(owner: str, name: str, model_dir: Path, token: str, dry_run: bool) -> b
         return True
 
     status, _ = api("GET", f"/models/{slug}", token)
-    if status == 404:
-        c_status, c_body = api("POST", "/models", token, create_payload)
-        if c_status not in (200, 201):
-            print(f"✗ {slug}: create failed ({c_status}): {c_body}", file=sys.stderr)
-            return False
-        print(f"✓ {slug}: created (visibility={VISIBILITY}, hardware={HARDWARE})")
-    elif status == 200:
+    if status == 200:
         print(f"• {slug}: exists")
+    elif status == 404:
+        if not ensure_created(slug, create_payload, token):
+            return False
     else:
-        print(f"✗ {slug}: unexpected GET status {status}", file=sys.stderr)
-        return False
+        # GET can be unreliable for some tokens/CDN paths (e.g. 403); fall back to create-or-conflict.
+        print(f"… {slug}: GET returned {status}; attempting create-or-update", file=sys.stderr)
+        if not ensure_created(slug, create_payload, token):
+            return False
 
     u_status, u_body = api("PATCH", f"/models/{slug}", token, update_payload)
     if u_status == 200:

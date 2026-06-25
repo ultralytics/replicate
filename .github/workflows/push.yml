@@ -17,6 +17,7 @@ jobs:
     name: Build, Test & Push Model
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         model: [yolo11n, yolov8s-worldv2, yoloe11s, yolo26/detect, yolo26/seg, yolo26/sem, yolo26/cls, yolo26/pose, yolo26/obb]
     steps:
