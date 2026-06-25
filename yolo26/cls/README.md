@@ -6,13 +6,15 @@
 
 [![Run Ultralytics on Gradient](https://assets.paperspace.io/img/gradient-badge.svg)](https://console.paperspace.com/github/ultralytics/ultralytics) [![Open Ultralytics In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ultralytics/ultralytics/blob/main/examples/tutorial.ipynb) [![Open Ultralytics In Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/models/ultralytics/yolo26) [![Open Ultralytics In Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ultralytics/ultralytics/HEAD?labpath=examples%2Ftutorial.ipynb)
 
-# Ultralytics YOLO11n Object Detection
+# Ultralytics YOLO26 Classification
 
-This endpoint runs Ultralytics YOLO11n, the nano variant of the YOLO11 family, for real-time object detection on the 80 [COCO](https://docs.ultralytics.com/datasets/detect/coco) classes. It loads the fixed `yolo11n.pt` weights (this endpoint is not size-selectable) and returns an annotated image plus optional JSON detections. Inputs let you tune confidence, IoU (NMS) threshold, and image size at inference time.
+[Ultralytics](https://www.ultralytics.com/) creates cutting-edge, state-of-the-art (SOTA) [YOLO models](https://www.ultralytics.com/yolo) built on years of foundational research in computer vision and AI. [YOLO26](https://docs.ultralytics.com/models/yolo26) is the latest generation — **fast**, **accurate**, and **easy to use**. This Replicate deployment runs YOLO26 on CPU with a runtime-selectable model size (n/s/m/l/x); this endpoint performs [image classification](https://docs.ultralytics.com/tasks/classify), predicting the top [ImageNet](https://docs.ultralytics.com/datasets/classify/imagenet) classes (1000 categories) for an input image.
 
 Find detailed documentation in the [Ultralytics Docs](https://docs.ultralytics.com/). Get support via [GitHub Issues](https://github.com/ultralytics/ultralytics/issues/new/choose). Join discussions on [Discord](https://discord.com/invite/ultralytics), [Reddit](https://www.reddit.com/r/ultralytics/), and the [Ultralytics Community Forums](https://community.ultralytics.com/)!
 
 Request an Enterprise License for commercial use at [Ultralytics Licensing](https://www.ultralytics.com/license).
+
+[![YOLO26 performance plots](https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png)](https://platform.ultralytics.com/ultralytics/yolo26)
 
 ## 📄 Documentation
 
@@ -35,7 +37,7 @@ For alternative installation methods, including [Conda](https://anaconda.org/con
 You can run this model from the Command Line Interface (CLI) with the `yolo` command:
 
 ```bash
-yolo predict model=yolo11n.pt source=path/to/bus.jpg
+yolo predict model=yolo26n-cls.pt source='https://ultralytics.com/images/bus.jpg'
 ```
 
 The `yolo` command supports various tasks and modes, accepting additional arguments like `imgsz=640`. See the [CLI Docs](https://docs.ultralytics.com/usage/cli).
@@ -47,33 +49,31 @@ You can also run the model directly in Python:
 ```python
 from ultralytics import YOLO
 
-# Load the COCO-pretrained YOLO11n model (the deployed weights)
-model = YOLO("yolo11n.pt")
+# Load the pretrained YOLO26-cls model
+model = YOLO("yolo26n-cls.pt")
 
 # Run inference on an image
-results = model("path/to/bus.jpg", conf=0.25, iou=0.45, imgsz=640)
-
-# Save the annotated image and print JSON detections
-results[0].save("output.png")
-print(results[0].to_json())
+results = model("path/to/image.jpg")
+results[0].show()  # display the annotated result
+results[0].save("output.png")  # save it
 ```
 
 Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 ## ✨ Model
 
-Performance on the [COCO](https://cocodataset.org/) val2017 dataset. All weights download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
+Consult the [Classification Docs](https://docs.ultralytics.com/tasks/classify) for usage examples. These models are trained on [ImageNet](https://docs.ultralytics.com/datasets/classify/imagenet), covering 1000 classes. All models download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model   | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
-| ------- | ------------- | ------------- | ------------------- | ------------------------ | ---------- | --------- |
-| YOLO11n | 640           | 39.5          | 56.1 ± 0.8          | 1.5 ± 0.0                | 2.6        | 6.5       |
-| YOLO11s | 640           | 47.0          | 90.0 ± 1.2          | 2.5 ± 0.0                | 9.4        | 21.5      |
-| YOLO11m | 640           | 51.5          | 183.2 ± 2.0         | 4.7 ± 0.1                | 20.1       | 68.0      |
-| YOLO11l | 640           | 53.4          | 238.6 ± 1.4         | 6.2 ± 0.1                | 25.3       | 86.9      |
-| YOLO11x | 640           | 54.7          | 462.8 ± 6.7         | 11.3 ± 0.2               | 56.9       | 194.9     |
+| Model                                                                                        | size (pixels) | acc top1 | acc top5 | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) at 224 |
+| -------------------------------------------------------------------------------------------- | ------------- | -------- | -------- | ------------------- | ------------------------ | ---------- | ---------------- |
+| [YOLO26n-cls](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-cls.pt) | 224           | 71.4     | 90.1     | 5.0 ± 0.3           | 1.1 ± 0.0                | 2.8        | 0.5              |
+| [YOLO26s-cls](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-cls.pt) | 224           | 76.0     | 92.9     | 7.9 ± 0.2           | 1.3 ± 0.0                | 6.7        | 1.6              |
+| [YOLO26m-cls](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-cls.pt) | 224           | 78.1     | 94.2     | 17.2 ± 0.4          | 2.0 ± 0.0                | 11.6       | 4.9              |
+| [YOLO26l-cls](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-cls.pt) | 224           | 79.0     | 94.6     | 23.2 ± 0.3          | 2.8 ± 0.0                | 14.1       | 6.2              |
+| [YOLO26x-cls](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-cls.pt) | 224           | 79.9     | 95.0     | 41.4 ± 0.9          | 3.8 ± 0.0                | 29.6       | 13.6             |
 
-- **mAP val** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset.
-- This Replicate endpoint serves only the deployed **YOLO11n** (nano) variant; the other rows are shown for reference.
+- **acc** values are model accuracy on the [ImageNet](https://www.image-net.org/) validation set. Reproduce with `yolo val classify data=path/to/ImageNet device=0`
+- **Speed** metrics are averaged over dataset val images; CPU speeds measured with [ONNX](https://onnx.ai/) export, GPU speeds with [TensorRT](https://developer.nvidia.com/tensorrt). See [YOLO Performance Metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics) for details.
 
 ## 🧩 Integrations
 

@@ -16,8 +16,8 @@ Deploy Ultralytics YOLO models to Replicate with ready-to-use Cog configurations
 
 ## 🗂️ Repository Structure
 
-This repository provides optimized Replicate deployments for YOLO11n, YOLOv8s WorldV2, and YOLOE-11S models with an
-automated CI/CD workflow.
+This repository provides optimized Replicate deployments for YOLO11n, YOLOv8s WorldV2, YOLOE-11S, and the full YOLO26 task
+family (detect, segment, semantic, classify, pose, OBB) with an automated CI/CD workflow.
 
 ```plaintext
 ultralytics/replicate/
@@ -34,10 +34,17 @@ ultralytics/replicate/
 │   ├── cog.yaml              # Cog configuration
 │   ├── predict.py            # Prediction interface
 │   └── README.md             # Model documentation
-├── yolo26/                   # YOLO26 model deployment (selectable size n/s/m/l/x)
-│   ├── cog.yaml              # Cog configuration
-│   ├── predict.py            # Prediction interface
-│   └── README.md             # Model documentation
+├── yolo26/                   # YOLO26 family — 6 tasks, each with selectable size n/s/m/l/x
+│   ├── detect/               # Object detection       → r8.im/ultralytics/yolo26
+│   ├── seg/                  # Instance segmentation  → r8.im/ultralytics/yolo26-seg
+│   ├── sem/                  # Semantic segmentation  → r8.im/ultralytics/yolo26-sem
+│   ├── cls/                  # Classification         → r8.im/ultralytics/yolo26-cls
+│   ├── pose/                 # Pose estimation        → r8.im/ultralytics/yolo26-pose
+│   └── obb/                  # Oriented bounding box  → r8.im/ultralytics/yolo26-obb
+│       ├── cog.yaml          #   each task dir has the standard four-file layout:
+│       ├── predict.py        #   cog.yaml, predict.py, download.py, README.md
+│       ├── download.py
+│       └── README.md
 ├── assets/                   # Sample images for workflow smoke tests
 │
 ├── .github/workflows/        # Automated deployment
@@ -76,6 +83,11 @@ cog push r8.im/ultralytics/yolov8s-worldv2
 cd ../yoloe11s
 python download.py
 cog push r8.im/ultralytics/yoloe-11s
+
+# Or deploy a YOLO26 task (detect/seg/sem/cls/pose/obb)
+cd ../yolo26/seg
+python download.py
+cog push # uses the image: target in cog.yaml (r8.im/ultralytics/yolo26-seg)
 ```
 
 ### Automated Deployment with GitHub Actions
@@ -105,12 +117,17 @@ pip install -r requirements.txt
 
 ## 🎯 Available Models
 
-| Directory          | Replicate model                     | Predictor   | Notes                                                    |
-| ------------------ | ----------------------------------- | ----------- | -------------------------------------------------------- |
-| `yolo11n/`         | `r8.im/ultralytics/yolo11n`         | `YOLO`      | Official YOLO11n object detection model                  |
-| `yolov8s-worldv2/` | `r8.im/ultralytics/yolov8s-worldv2` | `YOLOWorld` | Open-vocabulary YOLOv8s WorldV2 model                    |
-| `yoloe11s/`        | `r8.im/ultralytics/yoloe-11s`       | `YOLOE`     | YOLOE-11S segmentation model with class prompt support   |
-| `yolo26/`          | `r8.im/ultralytics/yolo26`          | `YOLO`      | YOLO26 detection with runtime size selection (n/s/m/l/x) |
+| Directory          | Replicate model                     | Predictor   | Notes                                                  |
+| ------------------ | ----------------------------------- | ----------- | ------------------------------------------------------ |
+| `yolo11n/`         | `r8.im/ultralytics/yolo11n`         | `YOLO`      | Official YOLO11n object detection model                |
+| `yolov8s-worldv2/` | `r8.im/ultralytics/yolov8s-worldv2` | `YOLOWorld` | Open-vocabulary YOLOv8s WorldV2 model                  |
+| `yoloe11s/`        | `r8.im/ultralytics/yoloe-11s`       | `YOLOE`     | YOLOE-11S segmentation model with class prompt support |
+| `yolo26/detect/`   | `r8.im/ultralytics/yolo26`          | `YOLO`      | YOLO26 detection (COCO), runtime size n/s/m/l/x        |
+| `yolo26/seg/`      | `r8.im/ultralytics/yolo26-seg`      | `YOLO`      | YOLO26 instance segmentation (COCO-Seg)                |
+| `yolo26/sem/`      | `r8.im/ultralytics/yolo26-sem`      | `YOLO`      | YOLO26 semantic segmentation (Cityscapes)              |
+| `yolo26/cls/`      | `r8.im/ultralytics/yolo26-cls`      | `YOLO`      | YOLO26 classification (ImageNet)                       |
+| `yolo26/pose/`     | `r8.im/ultralytics/yolo26-pose`     | `YOLO`      | YOLO26 pose estimation (COCO-Pose)                     |
+| `yolo26/obb/`      | `r8.im/ultralytics/yolo26-obb`      | `YOLO`      | YOLO26 oriented bounding box (DOTAv1)                  |
 
 ## 🔧 Model Setup
 

@@ -7,7 +7,7 @@ build:
     - "libglib2.0-0"
     - "ffmpeg"
   python_packages:
-    - "ultralytics>=8.4.75"
+    - "ultralytics>=8.4.77"
 
 predict: predict.py:Predictor
 image: r8.im/ultralytics/yolo26

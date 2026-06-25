@@ -6,13 +6,15 @@
 
 [![Run Ultralytics on Gradient](https://assets.paperspace.io/img/gradient-badge.svg)](https://console.paperspace.com/github/ultralytics/ultralytics) [![Open Ultralytics In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ultralytics/ultralytics/blob/main/examples/tutorial.ipynb) [![Open Ultralytics In Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/models/ultralytics/yolo26) [![Open Ultralytics In Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ultralytics/ultralytics/HEAD?labpath=examples%2Ftutorial.ipynb)
 
-# Ultralytics YOLO11n Object Detection
+# Ultralytics YOLO26 Pose Estimation
 
-This endpoint runs Ultralytics YOLO11n, the nano variant of the YOLO11 family, for real-time object detection on the 80 [COCO](https://docs.ultralytics.com/datasets/detect/coco) classes. It loads the fixed `yolo11n.pt` weights (this endpoint is not size-selectable) and returns an annotated image plus optional JSON detections. Inputs let you tune confidence, IoU (NMS) threshold, and image size at inference time.
+[Ultralytics](https://www.ultralytics.com/) creates cutting-edge, state-of-the-art (SOTA) [YOLO models](https://www.ultralytics.com/yolo) built on years of foundational research in computer vision and AI. [YOLO26](https://docs.ultralytics.com/models/yolo26) is the latest generation — **fast**, **accurate**, and **easy to use**. This Replicate deployment runs YOLO26 on CPU with a runtime-selectable model size (n/s/m/l/x); this endpoint performs [pose estimation](https://docs.ultralytics.com/tasks/pose), detecting human body keypoints and skeletons for the [COCO-Pose](https://docs.ultralytics.com/datasets/pose/coco) 'person' class.
 
 Find detailed documentation in the [Ultralytics Docs](https://docs.ultralytics.com/). Get support via [GitHub Issues](https://github.com/ultralytics/ultralytics/issues/new/choose). Join discussions on [Discord](https://discord.com/invite/ultralytics), [Reddit](https://www.reddit.com/r/ultralytics/), and the [Ultralytics Community Forums](https://community.ultralytics.com/)!
 
 Request an Enterprise License for commercial use at [Ultralytics Licensing](https://www.ultralytics.com/license).
+
+[![YOLO26 performance plots](https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png)](https://platform.ultralytics.com/ultralytics/yolo26)
 
 ## 📄 Documentation
 
@@ -35,7 +37,7 @@ For alternative installation methods, including [Conda](https://anaconda.org/con
 You can run this model from the Command Line Interface (CLI) with the `yolo` command:
 
 ```bash
-yolo predict model=yolo11n.pt source=path/to/bus.jpg
+yolo predict model=yolo26n-pose.pt source='https://ultralytics.com/images/bus.jpg'
 ```
 
 The `yolo` command supports various tasks and modes, accepting additional arguments like `imgsz=640`. See the [CLI Docs](https://docs.ultralytics.com/usage/cli).
@@ -47,33 +49,31 @@ You can also run the model directly in Python:
 ```python
 from ultralytics import YOLO
 
-# Load the COCO-pretrained YOLO11n model (the deployed weights)
-model = YOLO("yolo11n.pt")
+# Load the pretrained YOLO26-pose model
+model = YOLO("yolo26n-pose.pt")
 
 # Run inference on an image
-results = model("path/to/bus.jpg", conf=0.25, iou=0.45, imgsz=640)
-
-# Save the annotated image and print JSON detections
-results[0].save("output.png")
-print(results[0].to_json())
+results = model("path/to/image.jpg")
+results[0].show()  # display the annotated result
+results[0].save("output.png")  # save it
 ```
 
 Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 ## ✨ Model
 
-Performance on the [COCO](https://cocodataset.org/) val2017 dataset. All weights download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
+See the [Pose Estimation Docs](https://docs.ultralytics.com/tasks/pose) for usage examples. These models are trained on [COCO-Pose](https://docs.ultralytics.com/datasets/pose/coco), focusing on the 'person' class. All models download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model   | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
-| ------- | ------------- | ------------- | ------------------- | ------------------------ | ---------- | --------- |
-| YOLO11n | 640           | 39.5          | 56.1 ± 0.8          | 1.5 ± 0.0                | 2.6        | 6.5       |
-| YOLO11s | 640           | 47.0          | 90.0 ± 1.2          | 2.5 ± 0.0                | 9.4        | 21.5      |
-| YOLO11m | 640           | 51.5          | 183.2 ± 2.0         | 4.7 ± 0.1                | 20.1       | 68.0      |
-| YOLO11l | 640           | 53.4          | 238.6 ± 1.4         | 6.2 ± 0.1                | 25.3       | 86.9      |
-| YOLO11x | 640           | 54.7          | 462.8 ± 6.7         | 11.3 ± 0.2               | 56.9       | 194.9     |
+| Model                                                                                          | size (pixels) | mAP pose 50-95 (e2e) | mAP pose 50 (e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
+| ---------------------------------------------------------------------------------------------- | ------------- | -------------------- | ----------------- | ------------------- | ------------------------ | ---------- | --------- |
+| [YOLO26n-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt) | 640           | 57.2                 | 83.3              | 40.3 ± 0.5          | 1.8 ± 0.0                | 2.9        | 7.5       |
+| [YOLO26s-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-pose.pt) | 640           | 63.0                 | 86.6              | 85.3 ± 0.9          | 2.7 ± 0.0                | 10.4       | 23.9      |
+| [YOLO26m-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-pose.pt) | 640           | 68.8                 | 89.6              | 218.0 ± 1.5         | 5.0 ± 0.1                | 21.5       | 73.1      |
+| [YOLO26l-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-pose.pt) | 640           | 70.4                 | 90.5              | 275.4 ± 2.4         | 6.5 ± 0.1                | 25.9       | 91.3      |
+| [YOLO26x-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-pose.pt) | 640           | 71.6                 | 91.6              | 565.4 ± 3.0         | 12.2 ± 0.2               | 57.6       | 201.7     |
 
-- **mAP val** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset.
-- This Replicate endpoint serves only the deployed **YOLO11n** (nano) variant; the other rows are shown for reference.
+- **mAP val** values are for single-model single-scale on the [COCO Keypoints val2017](https://docs.ultralytics.com/datasets/pose/coco) dataset. Reproduce with `yolo val pose data=coco-pose.yaml device=0`
+- **Speed** metrics are averaged over dataset val images; CPU speeds measured with [ONNX](https://onnx.ai/) export, GPU speeds with [TensorRT](https://developer.nvidia.com/tensorrt). See [YOLO Performance Metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics) for details.
 
 ## 🧩 Integrations
 
