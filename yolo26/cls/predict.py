@@ -39,8 +39,8 @@ class Predictor(BasePredictor):
             default="n",
             choices=["n", "s", "m", "l", "x"],
         ),
-        conf: float = Input(description="Confidence threshold", default=0.25, ge=0.0, le=1.0),
-        iou: float = Input(description="IoU threshold for NMS", default=0.45, ge=0.0, le=1.0),
+        conf: float = Input(description="Confidence threshold (unused for this task)", default=0.25, ge=0.0, le=1.0),
+        iou: float = Input(description="IoU threshold (unused for this task)", default=0.45, ge=0.0, le=1.0),
         imgsz: int = Input(description="Image size", default=224, choices=[224, 256, 320, 448, 640]),
         return_json: bool = Input(description="Return top-5 class predictions as JSON", default=False),
     ) -> Output:
