@@ -32,7 +32,7 @@ class Predictor(BasePredictor):
 
         else:
             self.model = YOLOE("yoloe-11s-seg.pt")
-            class_list = class_names.split(", ")
+            class_list = [c.strip() for c in class_names.split(",") if c.strip()]
             self.model.set_classes(class_list, self.model.get_text_pe(class_list))
 
     def predict(

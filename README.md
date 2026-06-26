@@ -137,6 +137,7 @@ Each model directory includes a `download.py` script used by the deployment work
 python yolo11n/download.py
 python yolov8s-worldv2/download.py
 python yoloe11s/download.py
+python yolo26/seg/download.py # YOLO26 task dirs (detect/seg/sem/cls/pose/obb) follow the same pattern
 ```
 
 ## 🧪 Local Testing
