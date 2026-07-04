@@ -42,8 +42,8 @@ python test_prediction.py --model yolo11n --image assets/bus.jpg
 
 # Build, test, and deploy one model — run from inside the leaf model dir, weights first
 cd yolo11n && python download.py && cog build
-cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45 -i return_json=true  # ../../assets from yolo26/<task>/
-cog push  # pushes to the image: target in cog.yaml; needs cog login / REPLICATE_API_TOKEN
+cog predict -i image=@../assets/bus.jpg -i conf=0.25 -i iou=0.45 -i return_json=true # ../../assets from yolo26/<task>/
+cog push                                                                             # pushes to the image: target in cog.yaml; needs cog login / REPLICATE_API_TOKEN
 
 # CI-equivalent checks (mirrors .github/workflows/ci.yml)
 python -m py_compile test_prediction.py && python test_prediction.py --help
