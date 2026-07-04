@@ -1,5 +1,5 @@
 # Ultralytics Replicate - Development Dependencies
-# For running utility scripts locally (export_models.py, test_prediction.py)
+# For running utility scripts locally (test_prediction.py, replicate_metadata.py)
 
 torch>=2.0.0
 torchvision>=0.15.0
