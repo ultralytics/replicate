@@ -6,7 +6,6 @@ Deploy Ultralytics YOLO models to Replicate with ready-to-use Cog configurations
 
 [![Push YOLO to Replicate](https://github.com/ultralytics/replicate/actions/workflows/push.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/push.yml)
 [![Ultralytics Actions](https://github.com/ultralytics/replicate/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/replicate/actions/workflows/format.yml)
-[![Codecov](https://codecov.io/github/ultralytics/replicate/branch/main/graph/badge.svg)](https://app.codecov.io/github/ultralytics/replicate)
 
 [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics)
 [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com/)
@@ -25,15 +24,10 @@ ultralytics/replicate/
 ├── yolo11n/                  # YOLO11n model deployment
 │   ├── cog.yaml              # Cog configuration
 │   ├── predict.py            # Prediction interface
+│   ├── download.py           # Weight download script (run before cog build)
 │   └── README.md             # Model documentation
-├── yolov8s-worldv2/          # YOLOv8s WorldV2 model deployment
-│   ├── cog.yaml              # Cog configuration
-│   ├── predict.py            # Prediction interface
-│   └── README.md             # Model documentation
-├── yoloe11s/                 # YOLOE-11S model deployment
-│   ├── cog.yaml              # Cog configuration
-│   ├── predict.py            # Prediction interface
-│   └── README.md             # Model documentation
+├── yolov8s-worldv2/          # YOLOv8s WorldV2 model deployment (same four-file layout)
+├── yoloe11s/                 # YOLOE-11S model deployment (same four-file layout)
 ├── yolo26/                   # YOLO26 family — 6 tasks, each with selectable size n/s/m/l/x
 │   ├── detect/               # Object detection       → r8.im/ultralytics/yolo26
 │   ├── seg/                  # Instance segmentation  → r8.im/ultralytics/yolo26-seg
@@ -53,6 +47,7 @@ ultralytics/replicate/
 │   └── format.yml            # Code formatting
 │
 ├── test_prediction.py        # Local YOLO11n testing utility
+├── replicate_metadata.py     # Creates Replicate models and syncs page metadata on deploy
 ├── requirements.txt          # Dependencies
 ├── LICENSE                   # AGPL-3.0 license
 └── README.md                 # This file
