@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: 3.12
       - name: Setup uv
-        uses: astral-sh/setup-uv@v6
+        uses: ultralytics/actions/setup-uv@main
       - name: Install dependencies
         uses: ultralytics/actions/retry@main
         with:

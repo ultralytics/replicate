@@ -30,7 +30,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v6
+        uses: ultralytics/actions/setup-uv@main
 
       - name: Install dependencies
         run: |
