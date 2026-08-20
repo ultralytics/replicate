@@ -60,41 +60,41 @@ COVER_IMAGE_URL = (
 SPECS: dict[str, dict[str, str]] = {
     "yolo11n": {
         "description": "Ultralytics YOLO11n object detection (COCO) — fast CPU PyTorch inference.",
-        "paper_url": "https://docs.ultralytics.com/models/yolo11/",
+        "paper_url": "https://docs.ultralytics.com/models/yolo11",
         "weights_url": "https://platform.ultralytics.com/ultralytics/yolo11",
     },
     "yolov8s-worldv2": {
         "description": "Open-vocabulary YOLOv8s-WorldV2 detection — detect any classes you name.",
-        "paper_url": "https://docs.ultralytics.com/models/yolo-world/",
+        "paper_url": "https://docs.ultralytics.com/models/yolo-world",
         "weights_url": "https://platform.ultralytics.com/ultralytics/yolov8",
     },
     "yoloe-11s": {
         "description": "YOLOE-11S open-vocabulary segmentation with text class prompts.",
-        "paper_url": "https://docs.ultralytics.com/models/yoloe/",
+        "paper_url": "https://docs.ultralytics.com/models/yoloe",
     },
     "yolo26": {
         "description": "Ultralytics YOLO26 object detection (COCO), selectable size n/s/m/l/x.",
-        "paper_url": "https://docs.ultralytics.com/models/yolo26/",
+        "paper_url": "https://docs.ultralytics.com/models/yolo26",
     },
     "yolo26-seg": {
         "description": "Ultralytics YOLO26 instance segmentation (COCO-Seg), selectable size n/s/m/l/x.",
-        "paper_url": "https://docs.ultralytics.com/tasks/segment/",
+        "paper_url": "https://docs.ultralytics.com/tasks/segment",
     },
     "yolo26-sem": {
         "description": "Ultralytics YOLO26 semantic segmentation (Cityscapes), selectable size n/s/m/l/x.",
-        "paper_url": "https://docs.ultralytics.com/tasks/semantic/",
+        "paper_url": "https://docs.ultralytics.com/tasks/semantic",
     },
     "yolo26-cls": {
         "description": "Ultralytics YOLO26 image classification (ImageNet), selectable size n/s/m/l/x.",
-        "paper_url": "https://docs.ultralytics.com/tasks/classify/",
+        "paper_url": "https://docs.ultralytics.com/tasks/classify",
     },
     "yolo26-pose": {
         "description": "Ultralytics YOLO26 pose estimation (COCO-Pose), selectable size n/s/m/l/x.",
-        "paper_url": "https://docs.ultralytics.com/tasks/pose/",
+        "paper_url": "https://docs.ultralytics.com/tasks/pose",
     },
     "yolo26-obb": {
         "description": "Ultralytics YOLO26 oriented bounding box detection (DOTAv1), selectable size n/s/m/l/x.",
-        "paper_url": "https://docs.ultralytics.com/tasks/obb/",
+        "paper_url": "https://docs.ultralytics.com/tasks/obb",
     },
 }
 
