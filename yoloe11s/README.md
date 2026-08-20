@@ -2,21 +2,21 @@
 
 [中文](https://docs.ultralytics.com/zh) | [한국어](https://docs.ultralytics.com/ko) | [日本語](https://docs.ultralytics.com/ja) | [Русский](https://docs.ultralytics.com/ru) | [Deutsch](https://docs.ultralytics.com/de) | [Français](https://docs.ultralytics.com/fr) | [Español](https://docs.ultralytics.com/es) | [Português](https://docs.ultralytics.com/pt) | [Türkçe](https://docs.ultralytics.com/tr) | [Tiếng Việt](https://docs.ultralytics.com/vi) | [العربية](https://docs.ultralytics.com/ar)
 
-[![Ultralytics CI](https://github.com/ultralytics/ultralytics/actions/workflows/ci.yml/badge.svg)](https://github.com/ultralytics/ultralytics/actions/workflows/ci.yml) [![Ultralytics Downloads](https://static.pepy.tech/badge/ultralytics)](https://clickpy.clickhouse.com/dashboard/ultralytics) [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics) [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com/) [![Ultralytics Reddit](https://img.shields.io/reddit/subreddit-subscribers/ultralytics?style=flat&logo=reddit&logoColor=white&label=Reddit&color=blue)](https://www.reddit.com/r/ultralytics/)
+[![Ultralytics CI](https://github.com/ultralytics/ultralytics/actions/workflows/ci.yml/badge.svg)](https://github.com/ultralytics/ultralytics/actions/workflows/ci.yml) [![Ultralytics Downloads](https://static.pepy.tech/badge/ultralytics)](https://clickpy.clickhouse.com/dashboard/ultralytics) [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics) [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com) [![Ultralytics Reddit](https://img.shields.io/reddit/subreddit-subscribers/ultralytics?style=flat&logo=reddit&logoColor=white&label=Reddit&color=blue)](https://www.reddit.com/r/ultralytics/)
 
 [![Run Ultralytics on Gradient](https://assets.paperspace.io/img/gradient-badge.svg)](https://console.paperspace.com/github/ultralytics/ultralytics) [![Open Ultralytics In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ultralytics/ultralytics/blob/main/examples/tutorial.ipynb) [![Open Ultralytics In Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/models/ultralytics/yolo26) [![Open Ultralytics In Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ultralytics/ultralytics/HEAD?labpath=examples%2Ftutorial.ipynb)
 
 # Ultralytics YOLOE-11S Open-Vocabulary Instance Segmentation
 
-This endpoint deploys Ultralytics [YOLOE](https://docs.ultralytics.com/models/yoloe/)-11S (`yoloe-11s-seg.pt`), a real-time open-vocabulary instance segmentation model that detects and segments arbitrary object classes from text prompts. The Replicate endpoint accepts a comma-separated `class_names` input, which is applied via `set_classes()` before inference; when `class_names` is left empty it falls back to the prompt-free weights (`yoloe-11s-seg-pf.pt`) that detect from a built-in vocabulary. Both detection boxes and pixel-precise segmentation masks are returned on the annotated image, with optional JSON.
+This endpoint deploys Ultralytics [YOLOE](https://docs.ultralytics.com/models/yoloe)-11S (`yoloe-11s-seg.pt`), a real-time open-vocabulary instance segmentation model that detects and segments arbitrary object classes from text prompts. The Replicate endpoint accepts a comma-separated `class_names` input, which is applied via `set_classes()` before inference; when `class_names` is left empty it falls back to the prompt-free weights (`yoloe-11s-seg-pf.pt`) that detect from a built-in vocabulary. Both detection boxes and pixel-precise segmentation masks are returned on the annotated image, with optional JSON.
 
-Find detailed documentation in the [Ultralytics Docs](https://docs.ultralytics.com/). Get support via [GitHub Issues](https://github.com/ultralytics/ultralytics/issues/new/choose). Join discussions on [Discord](https://discord.com/invite/ultralytics), [Reddit](https://www.reddit.com/r/ultralytics/), and the [Ultralytics Community Forums](https://community.ultralytics.com/)!
+Find detailed documentation in the [Ultralytics Docs](https://docs.ultralytics.com). Get support via [GitHub Issues](https://github.com/ultralytics/ultralytics/issues/new/choose). Join discussions on [Discord](https://discord.com/invite/ultralytics), [Reddit](https://www.reddit.com/r/ultralytics/), and the [Ultralytics Community Forums](https://community.ultralytics.com)!
 
 Request an Enterprise License for commercial use at [Ultralytics Licensing](https://www.ultralytics.com/license).
 
 ## 📄 Documentation
 
-For comprehensive guidance on training, validation, prediction, and deployment, refer to the full [Ultralytics Docs](https://docs.ultralytics.com/).
+For comprehensive guidance on training, validation, prediction, and deployment, refer to the full [Ultralytics Docs](https://docs.ultralytics.com).
 
 ### Install
 
@@ -71,7 +71,7 @@ YOLOE-11 open-vocabulary instance segmentation models. This endpoint serves **YO
 | YOLOE-11M | yoloe-11m-seg.pt   | yoloe-11m-seg-pf.pt | Instance Segmentation |
 | YOLOE-11L | yoloe-11l-seg.pt   | yoloe-11l-seg-pf.pt | Instance Segmentation |
 
-- YOLOE improves by **+3.5 AP** over YOLO-Worldv2 on LVIS while using about a third of the training resources and ~1.4× faster inference, and supports text prompts, visual prompts, and a prompt-free mode. See the [YOLOE docs](https://docs.ultralytics.com/models/yoloe/).
+- YOLOE improves by **+3.5 AP** over YOLO-Worldv2 on LVIS while using about a third of the training resources and ~1.4× faster inference, and supports text prompts, visual prompts, and a prompt-free mode. See the [YOLOE docs](https://docs.ultralytics.com/models/yoloe).
 - This endpoint serves **YOLOE-11S**; the larger 11M/11L variants are shown for reference.
 
 ## 🧩 Integrations
@@ -93,4 +93,4 @@ Ultralytics offers two licensing options to suit different needs:
 
 ## 📞 Contact
 
-For bug reports and feature requests related to Ultralytics software, please visit [GitHub Issues](https://github.com/ultralytics/ultralytics/issues). For questions, discussions, and community support, join our active communities on [Discord](https://discord.com/invite/ultralytics), [Reddit](https://www.reddit.com/r/ultralytics/), and the [Ultralytics Community Forums](https://community.ultralytics.com/). We're here to help with all things Ultralytics!
+For bug reports and feature requests related to Ultralytics software, please visit [GitHub Issues](https://github.com/ultralytics/ultralytics/issues). For questions, discussions, and community support, join our active communities on [Discord](https://discord.com/invite/ultralytics), [Reddit](https://www.reddit.com/r/ultralytics/), and the [Ultralytics Community Forums](https://community.ultralytics.com). We're here to help with all things Ultralytics!
