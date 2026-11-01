@@ -62,15 +62,15 @@ Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 Refer to the [Segmentation Docs](https://docs.ultralytics.com/tasks/segment) for usage examples. These models are trained on [COCO-Seg](https://docs.ultralytics.com/datasets/segment/coco), including 80 classes. All models download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model                                                                                        | size (pixels) | mAP box 50-95 (e2e) | mAP mask 50-95 (e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
-| -------------------------------------------------------------------------------------------- | ------------- | ------------------- | -------------------- | ------------------- | ------------------------ | ---------- | --------- |
-| [YOLO26n-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-seg.pt) | 640           | 39.6                | 33.9                 | 53.3 ± 0.5          | 2.1 ± 0.0                | 2.7        | 9.1       |
-| [YOLO26s-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-seg.pt) | 640           | 47.3                | 40.0                 | 118.4 ± 0.9         | 3.3 ± 0.0                | 10.4       | 34.2      |
-| [YOLO26m-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-seg.pt) | 640           | 52.5                | 44.1                 | 328.2 ± 2.4         | 6.7 ± 0.1                | 23.6       | 121.5     |
-| [YOLO26l-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-seg.pt) | 640           | 54.4                | 45.5                 | 387.0 ± 3.7         | 8.0 ± 0.1                | 28.0       | 139.8     |
-| [YOLO26x-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-seg.pt) | 640           | 56.5                | 47.0                 | 787.0 ± 6.8         | 16.4 ± 0.1               | 62.8       | 313.5     |
+| Model                                                                                        | size (pixels) | mAP<sup>box</sup><sub>50-95</sub><br>(e2e) | mAP<sup>mask</sup><sub>50-95</sub><br>(e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
+| -------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------ | ------------------------------------------- | ------------------- | ------------------------ | ---------- | --------- |
+| [YOLO26n-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-seg.pt) | 640           | 39.6                                       | 33.9                                        | 53.3 ± 0.5          | 2.1 ± 0.0                | 2.7        | 9.1       |
+| [YOLO26s-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-seg.pt) | 640           | 47.3                                       | 40.0                                        | 118.4 ± 0.9         | 3.3 ± 0.0                | 10.4       | 34.2      |
+| [YOLO26m-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-seg.pt) | 640           | 52.5                                       | 44.1                                        | 328.2 ± 2.4         | 6.7 ± 0.1                | 23.6       | 121.5     |
+| [YOLO26l-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-seg.pt) | 640           | 54.4                                       | 45.5                                        | 387.0 ± 3.7         | 8.0 ± 0.1                | 28.0       | 139.8     |
+| [YOLO26x-seg](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-seg.pt) | 640           | 56.5                                       | 47.0                                        | 787.0 ± 6.8         | 16.4 ± 0.1               | 62.8       | 313.5     |
 
-- **mAP box/mask** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset. Reproduce with `yolo val segment data=coco.yaml device=0`
+- **mAP<sup>box</sup>/mAP<sup>mask</sup>** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset. Reproduce with `yolo val segment data=coco.yaml device=0`
 - **Speed** metrics are averaged over dataset val images; CPU speeds measured with [ONNX](https://onnx.ai/) export, GPU speeds with [TensorRT](https://developer.nvidia.com/tensorrt). See [YOLO Performance Metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics) for details.
 
 ## 🧩 Integrations

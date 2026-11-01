@@ -62,15 +62,15 @@ Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 See the [Pose Estimation Docs](https://docs.ultralytics.com/tasks/pose) for usage examples. These models are trained on [COCO-Pose](https://docs.ultralytics.com/datasets/pose/coco), focusing on the 'person' class. All models download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model                                                                                          | size (pixels) | mAP pose 50-95 (e2e) | mAP pose 50 (e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
-| ---------------------------------------------------------------------------------------------- | ------------- | -------------------- | ----------------- | ------------------- | ------------------------ | ---------- | --------- |
-| [YOLO26n-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt) | 640           | 57.2                 | 83.3              | 40.3 ± 0.5          | 1.8 ± 0.0                | 2.9        | 7.5       |
-| [YOLO26s-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-pose.pt) | 640           | 63.0                 | 86.6              | 85.3 ± 0.9          | 2.7 ± 0.0                | 10.4       | 23.9      |
-| [YOLO26m-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-pose.pt) | 640           | 68.8                 | 89.6              | 218.0 ± 1.5         | 5.0 ± 0.1                | 21.5       | 73.1      |
-| [YOLO26l-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-pose.pt) | 640           | 70.4                 | 90.5              | 275.4 ± 2.4         | 6.5 ± 0.1                | 25.9       | 91.3      |
-| [YOLO26x-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-pose.pt) | 640           | 71.6                 | 91.6              | 565.4 ± 3.0         | 12.2 ± 0.2               | 57.6       | 201.7     |
+| Model                                                                                          | size (pixels) | mAP<sup>pose</sup><sub>50-95</sub><br>(e2e) | mAP<sup>pose</sup><sub>50</sub><br>(e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
+| ---------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------- | ---------------------------------------- | ------------------- | ------------------------ | ---------- | --------- |
+| [YOLO26n-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt) | 640           | 57.2                                        | 83.3                                     | 40.3 ± 0.5          | 1.8 ± 0.0                | 2.9        | 7.5       |
+| [YOLO26s-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-pose.pt) | 640           | 63.0                                        | 86.6                                     | 85.3 ± 0.9          | 2.7 ± 0.0                | 10.4       | 23.9      |
+| [YOLO26m-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-pose.pt) | 640           | 68.8                                        | 89.6                                     | 218.0 ± 1.5         | 5.0 ± 0.1                | 21.5       | 73.1      |
+| [YOLO26l-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-pose.pt) | 640           | 70.4                                        | 90.5                                     | 275.4 ± 2.4         | 6.5 ± 0.1                | 25.9       | 91.3      |
+| [YOLO26x-pose](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-pose.pt) | 640           | 71.6                                        | 91.6                                     | 565.4 ± 3.0         | 12.2 ± 0.2               | 57.6       | 201.7     |
 
-- **mAP val** values are for single-model single-scale on the [COCO Keypoints val2017](https://docs.ultralytics.com/datasets/pose/coco) dataset. Reproduce with `yolo val pose data=coco-pose.yaml device=0`
+- **mAP<sup>val</sup>** values are for single-model single-scale on the [COCO Keypoints val2017](https://docs.ultralytics.com/datasets/pose/coco) dataset. Reproduce with `yolo val pose data=coco-pose.yaml device=0`
 - **Speed** metrics are averaged over dataset val images; CPU speeds measured with [ONNX](https://onnx.ai/) export, GPU speeds with [TensorRT](https://developer.nvidia.com/tensorrt). See [YOLO Performance Metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics) for details.
 
 ## 🧩 Integrations

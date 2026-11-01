@@ -62,15 +62,15 @@ Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 Check the [OBB Docs](https://docs.ultralytics.com/tasks/obb) for usage examples. These models are trained on [DOTAv1](https://docs.ultralytics.com/datasets/obb/dota-v2#dota-v10), including 15 classes. All models download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model                                                                                        | size (pixels) | mAP test 50-95 (e2e) | mAP test 50 (e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
-| -------------------------------------------------------------------------------------------- | ------------- | -------------------- | ----------------- | ------------------- | ------------------------ | ---------- | --------- |
-| [YOLO26n-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-obb.pt) | 1024          | 52.4                 | 78.9              | 97.7 ± 0.9          | 2.8 ± 0.0                | 2.5        | 14.0      |
-| [YOLO26s-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-obb.pt) | 1024          | 54.8                 | 80.9              | 218.0 ± 1.4         | 4.9 ± 0.1                | 9.8        | 55.1      |
-| [YOLO26m-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-obb.pt) | 1024          | 55.3                 | 81.0              | 579.2 ± 3.8         | 10.2 ± 0.3               | 21.2       | 183.3     |
-| [YOLO26l-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-obb.pt) | 1024          | 56.2                 | 81.6              | 735.6 ± 3.1         | 13.0 ± 0.2               | 25.6       | 230.0     |
-| [YOLO26x-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-obb.pt) | 1024          | 56.7                 | 81.7              | 1485.7 ± 11.5       | 30.5 ± 0.9               | 57.6       | 516.5     |
+| Model                                                                                        | size (pixels) | mAP<sup>test</sup><sub>50-95</sub><br>(e2e) | mAP<sup>test</sup><sub>50</sub><br>(e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
+| -------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------- | ---------------------------------------- | ------------------- | ------------------------ | ---------- | --------- |
+| [YOLO26n-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-obb.pt) | 1024          | 52.4                                        | 78.9                                     | 97.7 ± 0.9          | 2.8 ± 0.0                | 2.5        | 14.0      |
+| [YOLO26s-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-obb.pt) | 1024          | 54.8                                        | 80.9                                     | 218.0 ± 1.4         | 4.9 ± 0.1                | 9.8        | 55.1      |
+| [YOLO26m-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-obb.pt) | 1024          | 55.3                                        | 81.0                                     | 579.2 ± 3.8         | 10.2 ± 0.3               | 21.2       | 183.3     |
+| [YOLO26l-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-obb.pt) | 1024          | 56.2                                        | 81.6                                     | 735.6 ± 3.1         | 13.0 ± 0.2               | 25.6       | 230.0     |
+| [YOLO26x-obb](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-obb.pt) | 1024          | 56.7                                        | 81.7                                     | 1485.7 ± 11.5       | 30.5 ± 0.9               | 57.6       | 516.5     |
 
-- **mAP test** values are for single-model multiscale performance on the [DOTAv1 test set](https://captain-whu.github.io/DOTA/dataset.html). Reproduce with `yolo val obb data=DOTAv1.yaml device=0`
+- **mAP<sup>test</sup>** values are for single-model multiscale performance on the [DOTAv1 test set](https://captain-whu.github.io/DOTA/dataset.html). Reproduce with `yolo val obb data=DOTAv1.yaml device=0`
 - **Speed** metrics are averaged over dataset val images; CPU speeds measured with [ONNX](https://onnx.ai/) export, GPU speeds with [TensorRT](https://developer.nvidia.com/tensorrt). See [YOLO Performance Metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics) for details.
 
 ## 🧩 Integrations

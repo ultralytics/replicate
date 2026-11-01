@@ -62,15 +62,15 @@ Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 Explore the [Detection Docs](https://docs.ultralytics.com/tasks/detect) for usage examples. These models are trained on the [COCO dataset](https://cocodataset.org/), featuring 80 object classes. All models download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model                                                                                | size (pixels) | mAP val 50-95 | mAP val 50-95 (e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
-| ------------------------------------------------------------------------------------ | ------------- | ------------- | ------------------- | ------------------- | ------------------------ | ---------- | --------- |
-| [YOLO26n](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt) | 640           | 40.9          | 40.1                | 38.9 ± 0.7          | 1.7 ± 0.0                | 2.4        | 5.4       |
-| [YOLO26s](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s.pt) | 640           | 48.6          | 47.8                | 87.2 ± 0.9          | 2.5 ± 0.0                | 9.5        | 20.7      |
-| [YOLO26m](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m.pt) | 640           | 53.1          | 52.5                | 220.0 ± 1.4         | 4.7 ± 0.1                | 20.4       | 68.2      |
-| [YOLO26l](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l.pt) | 640           | 55.0          | 54.4                | 286.2 ± 2.0         | 6.2 ± 0.2                | 24.8       | 86.4      |
-| [YOLO26x](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x.pt) | 640           | 57.5          | 56.9                | 525.8 ± 4.0         | 11.8 ± 0.2               | 55.7       | 193.9     |
+| Model                                                                                | size (pixels) | mAP<sup>val</sup><sub>50-95</sub> | mAP<sup>val</sup><sub>50-95</sub><br>(e2e) | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
+| ------------------------------------------------------------------------------------ | ------------- | --------------------------------- | ------------------------------------------ | ------------------- | ------------------------ | ---------- | --------- |
+| [YOLO26n](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt) | 640           | 40.9                              | 40.1                                       | 38.9 ± 0.7          | 1.7 ± 0.0                | 2.4        | 5.4       |
+| [YOLO26s](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s.pt) | 640           | 48.6                              | 47.8                                       | 87.2 ± 0.9          | 2.5 ± 0.0                | 9.5        | 20.7      |
+| [YOLO26m](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m.pt) | 640           | 53.1                              | 52.5                                       | 220.0 ± 1.4         | 4.7 ± 0.1                | 20.4       | 68.2      |
+| [YOLO26l](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l.pt) | 640           | 55.0                              | 54.4                                       | 286.2 ± 2.0         | 6.2 ± 0.2                | 24.8       | 86.4      |
+| [YOLO26x](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x.pt) | 640           | 57.5                              | 56.9                                       | 525.8 ± 4.0         | 11.8 ± 0.2               | 55.7       | 193.9     |
 
-- **mAP val** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset. Reproduce with `yolo val detect data=coco.yaml device=0`
+- **mAP<sup>val</sup>** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset. Reproduce with `yolo val detect data=coco.yaml device=0`
 - **Speed** metrics are averaged over dataset val images; CPU speeds measured with [ONNX](https://onnx.ai/) export, GPU speeds with [TensorRT](https://developer.nvidia.com/tensorrt). See [YOLO Performance Metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics) for details.
 
 ## 🧩 Integrations
