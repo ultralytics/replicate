@@ -64,15 +64,15 @@ Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 Performance on the [COCO](https://cocodataset.org/) val2017 dataset. All weights download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model   | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
-| ------- | ------------- | ------------- | ------------------- | ------------------------ | ---------- | --------- |
-| YOLO11n | 640           | 39.5          | 56.1 ± 0.8          | 1.5 ± 0.0                | 2.6        | 6.5       |
-| YOLO11s | 640           | 47.0          | 90.0 ± 1.2          | 2.5 ± 0.0                | 9.4        | 21.5      |
-| YOLO11m | 640           | 51.5          | 183.2 ± 2.0         | 4.7 ± 0.1                | 20.1       | 68.0      |
-| YOLO11l | 640           | 53.4          | 238.6 ± 1.4         | 6.2 ± 0.1                | 25.3       | 86.9      |
-| YOLO11x | 640           | 54.7          | 462.8 ± 6.7         | 11.3 ± 0.2               | 56.9       | 194.9     |
+| Model   | size (pixels) | mAP<sup>val</sup><sub>50-95</sub> | Speed CPU ONNX (ms) | Speed T4 TensorRT10 (ms) | params (M) | FLOPs (B) |
+| ------- | ------------- | --------------------------------- | ------------------- | ------------------------ | ---------- | --------- |
+| YOLO11n | 640           | 39.5                              | 56.1 ± 0.8          | 1.5 ± 0.0                | 2.6        | 6.5       |
+| YOLO11s | 640           | 47.0                              | 90.0 ± 1.2          | 2.5 ± 0.0                | 9.4        | 21.5      |
+| YOLO11m | 640           | 51.5                              | 183.2 ± 2.0         | 4.7 ± 0.1                | 20.1       | 68.0      |
+| YOLO11l | 640           | 53.4                              | 238.6 ± 1.4         | 6.2 ± 0.1                | 25.3       | 86.9      |
+| YOLO11x | 640           | 54.7                              | 462.8 ± 6.7         | 11.3 ± 0.2               | 56.9       | 194.9     |
 
-- **mAP val** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset.
+- **mAP<sup>val</sup>** values are for single-model single-scale on the [COCO val2017](https://cocodataset.org/) dataset.
 - This Replicate endpoint serves only the deployed **YOLO11n** (nano) variant; the other rows are shown for reference.
 
 ## 🧩 Integrations

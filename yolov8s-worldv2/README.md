@@ -64,15 +64,15 @@ Discover more in the [Python Docs](https://docs.ultralytics.com/usage/python).
 
 Zero-shot transfer performance on the [COCO](https://cocodataset.org/) dataset. All weights download automatically from the latest Ultralytics [release](https://github.com/ultralytics/assets/releases) on first use.
 
-| Model           | mAP  | mAP50 | mAP75 |
-| --------------- | ---- | ----- | ----- |
-| YOLOv8s-worldv2 | 37.7 | 52.2  | 41.0  |
-| YOLOv8m-worldv2 | 43.0 | 58.4  | 46.8  |
-| YOLOv8l-worldv2 | 45.8 | 61.3  | 49.8  |
-| YOLOv8x-worldv2 | 47.1 | 62.8  | 51.4  |
+| Model           | mAP<sub>50-95</sub> | mAP<sub>50</sub> | mAP<sub>75</sub> |
+| --------------- | ------------------- | ---------------- | ---------------- |
+| YOLOv8s-worldv2 | 37.7                | 52.2             | 41.0             |
+| YOLOv8m-worldv2 | 43.0                | 58.4             | 46.8             |
+| YOLOv8l-worldv2 | 45.8                | 61.3             | 49.8             |
+| YOLOv8x-worldv2 | 47.1                | 62.8             | 51.4             |
 
-- Metrics are zero-shot transfer mAP / mAP50 / mAP75 on [COCO](https://cocodataset.org/), from the Ultralytics [YOLO-World docs](https://docs.ultralytics.com/models/yolo-world).
-- This endpoint serves the deployed **yolov8s-worldv2** variant (37.7 mAP); other rows are shown for reference.
+- Metrics are zero-shot transfer mAP<sub>50-95</sub> / mAP<sub>50</sub> / mAP<sub>75</sub> on [COCO](https://cocodataset.org/), from the Ultralytics [YOLO-World docs](https://docs.ultralytics.com/models/yolo-world).
+- This endpoint serves the deployed **yolov8s-worldv2** variant (37.7 mAP<sub>50-95</sub>); other rows are shown for reference.
 
 ## 🧩 Integrations
 

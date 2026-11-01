@@ -70,7 +70,7 @@ Consult the [Classification Docs](https://docs.ultralytics.com/tasks/classify) f
 | [YOLO26l-cls](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l-cls.pt) | 224           | 79.0     | 94.6     | 23.2 ± 0.3          | 2.8 ± 0.0                | 14.1       | 6.2              |
 | [YOLO26x-cls](https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26x-cls.pt) | 224           | 79.9     | 95.0     | 41.4 ± 0.9          | 3.8 ± 0.0                | 29.6       | 13.6             |
 
-- **acc** values are model accuracy on the [ImageNet](https://www.image-net.org/) validation set. Reproduce with `yolo val classify data=path/to/ImageNet device=0`
+- **acc** values are model accuracy on the [ImageNet](https://docs.ultralytics.com/datasets/classify/imagenet) validation set. Reproduce with `yolo val classify data=path/to/ImageNet device=0`
 - **Speed** metrics are averaged over dataset val images; CPU speeds measured with [ONNX](https://onnx.ai/) export, GPU speeds with [TensorRT](https://developer.nvidia.com/tensorrt). See [YOLO Performance Metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics) for details.
 
 ## 🧩 Integrations
