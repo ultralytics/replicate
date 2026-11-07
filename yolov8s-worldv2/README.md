@@ -54,7 +54,7 @@ model = YOLOWorld("yolov8s-worldv2.pt")
 model.set_classes(["person", "bus", "sign"])
 
 # Run inference
-results = model("path/to/image.jpg", conf=0.25, iou=0.45, imgsz=640)
+results = model("path/to/image.jpg", conf=0.25, iou=0.5, imgsz=640)
 results[0].show()
 ```
 

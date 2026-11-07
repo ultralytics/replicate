@@ -39,7 +39,7 @@ class Predictor(BasePredictor):
         self,
         image: Path = Input(description="Input image"),
         conf: float = Input(description="Confidence threshold", default=0.25, ge=0.0, le=1.0),
-        iou: float = Input(description="IoU threshold for NMS", default=0.45, ge=0.0, le=1.0),
+        iou: float = Input(description="IoU threshold for NMS", default=0.5, ge=0.0, le=1.0),
         imgsz: int = Input(description="Image size", default=640, choices=[320, 416, 512, 640, 832, 1024, 1280]),
         class_names: str = Input(
             description="Comma-separated list of class names to filter results (e.g., 'person, bus, sign') You can also leave it empty to detect classes automatically.",

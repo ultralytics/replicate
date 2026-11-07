@@ -55,7 +55,7 @@ class_names = ["person", "bus", "sign"]
 model.set_classes(class_names, model.get_text_pe(class_names))
 
 # Run open-vocabulary instance segmentation
-results = model("path/to/bus.jpg", conf=0.25, iou=0.45, imgsz=640)
+results = model("path/to/bus.jpg", conf=0.25, iou=0.5, imgsz=640)
 results[0].save("output.png")
 ```
 
