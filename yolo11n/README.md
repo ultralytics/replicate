@@ -51,7 +51,7 @@ from ultralytics import YOLO
 model = YOLO("yolo11n.pt")
 
 # Run inference on an image
-results = model("path/to/bus.jpg", conf=0.25, iou=0.45, imgsz=640)
+results = model("path/to/bus.jpg", conf=0.25, iou=0.5, imgsz=640)
 
 # Save the annotated image and print JSON detections
 results[0].save("output.png")

@@ -40,7 +40,7 @@ class Predictor(BasePredictor):
             choices=["n", "s", "m", "l", "x"],
         ),
         conf: float = Input(description="Confidence threshold (unused for this task)", default=0.25, ge=0.0, le=1.0),
-        iou: float = Input(description="IoU threshold (unused for this task)", default=0.45, ge=0.0, le=1.0),
+        iou: float = Input(description="IoU threshold (unused for this task)", default=0.5, ge=0.0, le=1.0),
         imgsz: int = Input(description="Image size", default=640, choices=[512, 640, 832, 1024, 1280]),
         return_json: bool = Input(description="Return per-class pixel coverage as JSON", default=False),
     ) -> Output:
